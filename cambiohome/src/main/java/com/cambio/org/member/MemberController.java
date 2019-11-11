@@ -37,7 +37,7 @@ public class MemberController {
 		
 		System.out.println(md);
 						
-		session.insert("singupinsert",md);
+		session.insert("member.singupinsert",md);
 		System.out.println("일로오나?");
 		return "home";
 	}
