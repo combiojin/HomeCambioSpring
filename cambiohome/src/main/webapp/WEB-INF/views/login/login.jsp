@@ -15,15 +15,15 @@
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item active"><a class="nav-link" href="${path}">Home</a>
 				</li>
-				<li class="nav-item"><a class="nav-link" href="//codeply.com">MemberList</a>
+				<li class="nav-item"><a class="nav-link" href="${path}/member/index.do">MemberList</a>
 				</li>
-				<li class="nav-item"><a class="nav-link" href="#">Board</a></li>
+				<li class="nav-item"><a class="nav-link" href="${path}/board/index.do">Board</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">Gallery</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
 			</ul>
 		</div>
 		<div class="mx-auto order-0">
-			<a class="navbar-brand mx-auto" href="#"><img
+			<a class="navbar-brand mx-auto" href="${path}"><img
 				src="${path}/resources/image/logo_white.png" width="100" height="30"
 				class="d-inline-block align-top" alt=""></a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -33,8 +33,8 @@
 		</div>
 		<div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
 			<ul class="navbar-nav ml-auto">
-				<li class="nav-item"><a class="nav-link" href="#">회원가입</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">로그인</a></li>
+				<li class="nav-item"><a class="nav-link" href="${path}/member/signup.do"><i class="fas fa-user-plus"></i>회원가입</a></li>
+				<li class="nav-item"><a class="nav-link" href="${path}/member/login.do"><i class="far fa-user"></i>로그인</a></li>
 			</ul>
 		</div>
 	</nav>

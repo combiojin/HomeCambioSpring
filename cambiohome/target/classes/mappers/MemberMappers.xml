@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member">
+	<select id="selectlist" resultType="com.cambio.org.member.MemberDTO">
+		select * from `cambio`.`member` order by member_idx desc
+	</select>
+	
+	<insert id="singupinsert" parameterType="com.cambio.org.member.MemberDTO">
+		insert into `cambio`.`member`
+		(member_id,member_pw,member_cpw,member_mail)
+		values
+		(#{member_id},#{member_pw},#{member_cpw},#{member_mail})
+	</insert>
+</mapper>
