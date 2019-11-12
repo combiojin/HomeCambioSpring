@@ -44,6 +44,10 @@
 					href="${path}/member/signup.do"><i class="fas fa-user-plus"></i>회원가입</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="${path}/member/login.do"><i class="far fa-user"></i>로그인</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="${path}/member/login.do"><i class="fas fa-user"></i>마이페이지</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="${path}/member/login.do"><i class="fas fa-sign-out-alt"></i>로그아웃</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -53,7 +57,8 @@
 			<div class="col-md-12">
 				<form id="delefrm" action="${path}/member/delete.do">
 					<h2>회원목록</h2>
-					<table class="table table-dark table-bordered">
+					<table class="table table-dark table-bordered"
+						style="text-align: center;">
 						<tr>
 							<th></th>
 							<th>순번</th>

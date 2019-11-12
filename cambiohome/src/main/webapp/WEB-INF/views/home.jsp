@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,13 +8,18 @@
 <title>Home</title>
 <%@include file="head.jsp"%>
 <script type="text/javascript">
-$('.bxslider').bxSlider({
-	  auto: true,
-	  autoControls: true,
-	  stopAutoOnClick: true,
-	  pager: true,
-	  slideWidth: 600
-	});
+$(document).ready(function() {
+	$('.bxslider').bxSlider({
+		  auto: true,
+		  stopAutoOnClick: true,
+		  pager: true,
+		  slideWidth: 1100,
+		  mode:'horizontal',
+		  speed:3000,
+		  slideMargin:0,
+ 	});
+});
+
 </script>
 </head>
 <body>
@@ -24,7 +30,7 @@ $('.bxslider').bxSlider({
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item active"><a class="nav-link" href="${path}">Home</a>
 				</li>
-				<li class="nav-item"><a class="nav-link" href="${path}/member/index.do">MemberList</a>
+				<li class="nav-item"><a class="nav-link" href="${path}/member/member_list.do">MemberList</a>
 				</li>
 				<li class="nav-item"><a class="nav-link" href="${path}/board/index.do">Board</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">Gallery</a></li>
