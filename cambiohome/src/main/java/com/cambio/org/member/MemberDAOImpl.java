@@ -40,6 +40,11 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 	//로그인
 	@Override
+	public MemberDTO memberLogin(MemberDTO dto) {
+		return sqlSession.selectOne("member.memberlogin", dto);
+	}
+	//로그인체크
+	@Override
 	public boolean checklogin(String member_id, String member_pw) {
 		boolean result=false;
 		//mapper에 2개 이상의 자료를 전달할때 : map,dto사용

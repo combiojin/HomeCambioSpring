@@ -32,6 +32,10 @@ public class MemberServiceImpl implements MemberService{
 		memberDao.updateMember(dto);
 	}
 	@Override
+	public MemberDTO memberLogin(MemberDTO dto) {
+		 return memberDao.memberLogin(dto);
+	}
+	@Override
 	public boolean checklogin(String member_id, String member_pw) {
 		return memberDao.checklogin(member_id, member_pw);
 	}

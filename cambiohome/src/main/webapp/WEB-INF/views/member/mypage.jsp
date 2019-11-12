@@ -1,13 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Sign Up</title>
+<title>Insert title here</title>
 <%@include file="../head.jsp"%>
 <script type="text/javascript">
 	function doCancel() {
+		location.href="/org";
+	}
+	function doDrop() {
+		alert("탈퇴완료 되었습니다.")
 		location.href="/org";
 	}
 </script>
@@ -23,7 +27,7 @@
 				<form action="${path}/member/signupProc.do">
 					<div class="form-group">
 						<span><i class="fas fa-user"></i></span> <input type="text"
-							class="form-control" id="member_id" placeholder="Id" name="member_id">
+							class="form-control" id="member_id" placeholder="Id" name="member_id" readonly="readonly">
 					</div>
 					<div class="form-group">
 						<span><i class="fas fa-key"></i></span> <input type="password"
@@ -39,7 +43,8 @@
 							class="form-control" id="member_mail" placeholder="E-mail"
 							name="member_mail">
 					</div>
-					<button type="submit" class="btn btn-dark">회원가입</button>
+					<button type="submit" class="btn btn-dark">수정</button>
+					<button type="button" class="btn btn-dark" onclick="doDrop();">탈퇴</button>
 					<button type="button" class="btn btn-dark" onclick="doCancel();">취소</button>
 				</form>
 			</div>

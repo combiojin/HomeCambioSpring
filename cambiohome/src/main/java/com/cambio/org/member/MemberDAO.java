@@ -17,5 +17,7 @@ public interface MemberDAO {
 	//회원정보수정
 	public void updateMember(MemberDTO dto);
 	//로그인
+	public MemberDTO memberLogin(MemberDTO dto);
+	//로그인체크
 	public boolean checklogin(String member_id, String member_pw);
 }
