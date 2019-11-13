@@ -8,9 +8,10 @@ public interface MemberService {
 	
 	public List<MemberDTO> memberList();
 	public void insertMember(MemberDTO dto);
-	public MemberDTO vieMember(String member_id);
-	public void deleteMember(String member_id);
+	public MemberDTO viewMember(String member_id);
+	public void deleteMember(MemberDTO dto);
 	public void updateMember(MemberDTO dto);
 	public MemberDTO memberLogin(MemberDTO dto);
-	public boolean checklogin(String member_id, String member_pw);
+	public boolean checkpw(String member_id, String member_pw);
+	public void updateAdmin(MemberDTO dto);
 }

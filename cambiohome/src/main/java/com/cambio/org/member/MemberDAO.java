@@ -11,13 +11,15 @@ public interface MemberDAO {
 	//회원가입
 	public void insertMember(MemberDTO dto);
 	//회원정보보기
-	public MemberDTO vieMember(String member_id);
+	public MemberDTO viewMember(String member_id);
 	//회원삭제
-	public void deleteMember(String member_id);
+	public void deleteMember(MemberDTO dto);
 	//회원정보수정
 	public void updateMember(MemberDTO dto);
 	//로그인
 	public MemberDTO memberLogin(MemberDTO dto);
 	//로그인체크
-	public boolean checklogin(String member_id, String member_pw);
+	public boolean checkpw(String member_id, String member_pw);
+	//관리자계정 회원정보수정
+	public void updateAdmin(MemberDTO dto);
 }

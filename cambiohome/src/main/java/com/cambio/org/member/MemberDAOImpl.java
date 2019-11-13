@@ -10,42 +10,49 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class MemberDAOImpl implements MemberDAO {
-	
+
 	@Autowired
 	SqlSession sqlSession;
-	//회원목록
+
+	// 회원목록
 	@Override
-	public List<MemberDTO> memberList(){
+	public List<MemberDTO> memberList() {
 		return sqlSession.selectList("member.memberList");
 	}
-	//회원가입
+
+	// 회원가입
 	@Override
 	public void insertMember(MemberDTO dto) {
-		sqlSession.insert("member.insertMember",dto);
+		sqlSession.insert("member.insertMember", dto);
 	}
-	//회원정보보기
+
+	// 회원정보보기
 	@Override
-	public MemberDTO vieMember(String member_id) {
-		return sqlSession.selectOne("member.viewMember",member_id);
+	public MemberDTO viewMember(String member_id) {
+		return sqlSession.selectOne("member.viewMember", member_id);
 	}
-	//회원삭제
+
+	// 회원삭제
 	@Override
-	public void deleteMember(String member_id) {
-		sqlSession.delete("member.deleteMember",member_id);
+	public void deleteMember(MemberDTO dto) {
+		sqlSession.delete("member.deleteMember", dto);
 	}
-	//회원정보수정
+
+	// 회원정보수정
 	@Override
 	public void updateMember(MemberDTO dto) {
-		sqlSession.update("member.updateMember",dto);
+		sqlSession.update("member.updateMember", dto);
 	}
-	//로그인
+
+	// 로그인
 	@Override
 	public MemberDTO memberLogin(MemberDTO dto) {
 		return sqlSession.selectOne("member.memberlogin", dto);
 	}
-	//로그인체크
+
+	// 로그인체크
 	@Override
-	public boolean checklogin(String member_id, String member_pw) {
+	public boolean checkpw(String member_id, String member_pw) {
 		boolean result=false;
 		//mapper에 2개 이상의 자료를 전달할때 : map,dto사용
 		Map<String, String> map=new HashMap<>();
@@ -56,5 +63,10 @@ public class MemberDAOImpl implements MemberDAO {
 		if(count==1) 
 			result = true;
 		return result;
+	}
+	
+	//관리자계정 회원정보수정
+	public void updateAdmin(MemberDTO dto) {
+		sqlSession.update("member.adminUpdate",dto);
 	}
 }

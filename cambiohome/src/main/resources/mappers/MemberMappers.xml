@@ -29,14 +29,20 @@
 		where member_id=#{member_id}
 	</update>
 	
+	<!-- 관리자계정 회원정보 수정 -->
+	<update id="adminUpdate" parameterType="com.cambio.org.member.MemberDTO">
+		update member set member_pw=#{member_pw}, member_cpw=#{member_cpw}, member_mail=#{member_mail}
+		where member_id=#{member_id}	
+	</update>
+	
 	<!-- 로그인 -->
 	<select id="memberlogin" resultType="com.cambio.org.member.MemberDTO">
 		select member_id from `cambio`.`member`
 		where member_id=#{member_id} and member_pw=#{member_pw}
 	</select>
 	
-	<!-- 로그인 체크 -->
-	<select id="checkLogin">
+	<!-- 비밀번호 체크 -->
+	<select id="checkpw">
 		select count(*) from `cambio`.`member`
 		where member_id=#{member_id} and member_pw=#{member_pw}
 	</select>

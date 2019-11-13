@@ -1,26 +1,26 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page session="false"%>
 <html>
 <head>
+<title>Home</title>
 <meta charset="UTF-8">
-<title>Sign Up</title>
 <%@include file="../head.jsp"%>
 <script type="text/javascript">
 	function doCancel() {
-		location.href = "/org";
+		location.href = "/org/member/member_list.do";
 	}
 </script>
 </head>
 <body>
 	<!-- menu -->
 	<%@include file="../menu.jsp"%>
-	<!-- 회원가입 -->
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
 				<h2>회원가입</h2>
-				<form action="${path}/member/signupProc.do">
+				<form action="${path}/member/admininsertProc.do">
 					<div class="form-group">
 						<span><i class="fas fa-user"></i></span> <input type="text"
 							class="form-control" id="member_id" placeholder="Id"
@@ -41,7 +41,7 @@
 							class="form-control" id="member_mail" placeholder="E-mail"
 							name="member_mail">
 					</div>
-					<button type="submit" class="btn btn-dark">회원가입</button>
+					<button type="submit" class="btn btn-dark">회원등록</button>
 					<button type="button" class="btn btn-dark" onclick="doCancel();">취소</button>
 				</form>
 			</div>
@@ -49,3 +49,15 @@
 	</div>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+

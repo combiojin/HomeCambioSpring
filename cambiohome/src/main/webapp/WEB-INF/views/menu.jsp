@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file="head.jsp" %>	
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
 	<div
 		class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
@@ -31,7 +32,7 @@
 				<li class="nav-item"><a class="nav-link"
 					href="${path}/member/login.do"><i class="far fa-user"></i>로그인</a></li>
 			</c:if>
-			<c:if test="${member != null }">
+			<c:if test="${member != null}">
 				<li class="nav-item"><a class="nav-link"
 					href="${path}/member/mypage.do"><i class="fas fa-user"></i>마이페이지</a></li>
 				<li class="nav-item"><a class="nav-link"
@@ -40,3 +41,4 @@
 		</ul>
 	</div>
 </nav>
+<%-- ${sessionScope.member} --%>

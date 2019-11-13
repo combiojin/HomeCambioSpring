@@ -20,12 +20,12 @@ public class MemberServiceImpl implements MemberService{
 		memberDao.insertMember(dto);
 	}
 	@Override
-	public MemberDTO vieMember(String member_id) {
-		return memberDao.vieMember(member_id);
+	public MemberDTO viewMember(String member_id) {
+		return memberDao.viewMember(member_id);
 	}
 	@Override
-	public void deleteMember(String member_id) {
-		memberDao.deleteMember(member_id);
+	public void deleteMember(MemberDTO dto) {
+		memberDao.deleteMember(dto);
 	}
 	@Override
 	public void updateMember(MemberDTO dto){
@@ -36,7 +36,11 @@ public class MemberServiceImpl implements MemberService{
 		 return memberDao.memberLogin(dto);
 	}
 	@Override
-	public boolean checklogin(String member_id, String member_pw) {
-		return memberDao.checklogin(member_id, member_pw);
+	public boolean checkpw(String member_id, String member_pw) {
+		return memberDao.checkpw(member_id, member_pw);
 	}
+	@Override
+	public void updateAdmin(MemberDTO dto) {
+		memberDao.updateAdmin(dto);
+}
 }
