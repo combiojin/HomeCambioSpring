@@ -34,7 +34,7 @@
 			</c:if>
 			<c:if test="${member != null}">
 				<li class="nav-item"><a class="nav-link"
-					href="${path}/member/mypage.do"><i class="fas fa-user"></i>마이페이지</a></li>
+					href="${path}/member/mypage.do?member_id=${member.member_id}"><i class="fas fa-user"></i>마이페이지</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="${path}/member/logout.do"><i class="fas fa-sign-out-alt"></i>로그아웃</a></li>
 			</c:if>

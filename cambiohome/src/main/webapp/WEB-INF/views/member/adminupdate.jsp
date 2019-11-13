@@ -29,10 +29,11 @@
 			<div class="col-md-12">
 				<h2>회원가입</h2>
 				<form action="${path}/member/adminupdateProc.do">
+					<input type="hidden" name="member_idx" value="${memberselect.member_idx}">
 					<div class="form-group">
 						<span><i class="fas fa-user"></i></span> <input type="text"
 							class="form-control" id="member_id" placeholder="Id"
-							name="member_id" value="${member.member_id}" readonly="readonly">
+							name="member_id" value="${member.member_id}" >
 					</div>
 					<div class="form-group">
 						<span><i class="fas fa-key"></i></span> <input type="password"
@@ -47,7 +48,7 @@
 					<div class="form-group">
 						<span><i class="fas fa-envelope"></i></span> <input type="email"
 							class="form-control" id="member_mail" placeholder="E-mail"
-							name="member_mail">
+							name="member_mail" value="${memberselect.member_mail}">
 					</div>
 					<button type="submit" class="btn btn-dark">회원수정</button>
 					<button type="button" class="btn btn-dark" onclick="doDrop();">회원삭제</button>

@@ -21,5 +21,7 @@ public interface MemberDAO {
 	//로그인체크
 	public boolean checkpw(String member_id, String member_pw);
 	//관리자계정 회원정보수정
-	public void updateAdmin(MemberDTO dto);
+	public MemberDTO updateAdmin(MemberDTO dto);
+	//순번셀렉
+	public MemberDTO memberSelect(int member_idx);
 }

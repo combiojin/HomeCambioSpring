@@ -40,7 +40,11 @@ public class MemberServiceImpl implements MemberService{
 		return memberDao.checkpw(member_id, member_pw);
 	}
 	@Override
-	public void updateAdmin(MemberDTO dto) {
-		memberDao.updateAdmin(dto);
-}
+	public MemberDTO updateAdmin(MemberDTO dto) {
+		return memberDao.updateAdmin(dto);
+	}
+	@Override
+	public MemberDTO memberSelect(int member_idx) {
+		return memberDao.memberSelect(member_idx);
+	}
 }

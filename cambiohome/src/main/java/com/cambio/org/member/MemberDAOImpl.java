@@ -66,7 +66,12 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 	
 	//관리자계정 회원정보수정
-	public void updateAdmin(MemberDTO dto) {
-		sqlSession.update("member.adminUpdate",dto);
+	public MemberDTO updateAdmin(MemberDTO dto) {
+		return sqlSession.selectOne("member.adminUpdate", dto);
 	}
+	//순번셀렉
+	public MemberDTO memberSelect(int member_idx) {
+		 return sqlSession.selectOne("member.memberSelect", member_idx);
+	}
+	
 }

@@ -30,9 +30,10 @@
 			<div class="col-md-12">
 				<h2>회원가입</h2>
 				<form action="${path}/member/mypageProc.do">
+					<input type="hidden" name="member_idx" value="${mypage.member_idx}">
 					<div class="form-group">
 						<span><i class="fas fa-user"></i></span> <input type="text"
-							class="form-control" id="member_id" placeholder="Id" name="member_id" value="${member.member_id}" readonly="readonly">
+							class="form-control" id="member_id" placeholder="Id" name="member_id" value="${mypage.member_id}" readonly="readonly">
 					</div>
 					<div class="form-group">
 						<span><i class="fas fa-key"></i></span> <input type="password"
@@ -46,7 +47,7 @@
 					<div class="form-group">
 						<span><i class="fas fa-envelope"></i></span> <input type="email"
 							class="form-control" id="member_mail" placeholder="E-mail"
-							name="member_mail" >
+							name="member_mail" value="${mypage.member_mail}" >
 					</div>
 					<button type="submit" class="btn btn-dark">수정</button>
 					<button type="button" class="btn btn-dark" onclick="doDrop();">탈퇴</button>

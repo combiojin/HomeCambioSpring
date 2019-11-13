@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -59,7 +60,9 @@ public class MemberController {
 
 	// 마이페이지
 	@RequestMapping(value = "/member/mypage.do")
-	public String mypage(Model model, HttpServletRequest request) {
+	public String mypage(Model model, @RequestParam String member_id, MemberDTO dto) {
+		
+		model.addAttribute("mypage",memberService.viewMember(member_id));
 
 		return "member/mypage";
 	}
@@ -127,19 +130,26 @@ public class MemberController {
 	}
 	
 	//관리자계정 회원수정
-	@RequestMapping(value = "/member/daminupdate.do")
-	public String adminupdate(Model model, HttpServletRequest request) {
+	@RequestMapping(value = "/member/adminupdate.do")
+	public String adminupdate(Model model, @RequestParam int member_idx, MemberDTO dto) {
+		
+		model.addAttribute("memberselect",memberService.memberSelect(member_idx));
 
 		return "member/adminupdate";
 	}
 	
-	@RequestMapping(value = "/member/daminupdateProc.do")
+	@RequestMapping(value = "/member/adminupdateProc.do")
 	public String adminupdateProc(Model model, HttpServletRequest request, HttpSession session, MemberDTO dto) {
 		
-		memberService.updateMember(dto);
+		HttpSession ssupdate = request.getSession();
+		
+		MemberDTO memberupdate = memberService.updateAdmin(dto);
+		
+		ssupdate.setAttribute("update", memberupdate);
 
 		return "redirect:member_list.do";
 	}
 	
+	//관리자계정 회원삭제
 	
 }
