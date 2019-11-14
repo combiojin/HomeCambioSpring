@@ -47,4 +47,10 @@ public class MemberServiceImpl implements MemberService{
 	public MemberDTO memberSelect(int member_idx) {
 		return memberDao.memberSelect(member_idx);
 	}
+	@Override
+	public void deleteMember(String idxs) {
+		memberDao.deleteMember(idxs);
+	}
+	
+	
 }

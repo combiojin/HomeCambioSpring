@@ -66,12 +66,23 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 	
 	//관리자계정 회원정보수정
+	@Override
 	public MemberDTO updateAdmin(MemberDTO dto) {
 		return sqlSession.selectOne("member.adminUpdate", dto);
 	}
 	//순번셀렉
+	@Override
 	public MemberDTO memberSelect(int member_idx) {
 		 return sqlSession.selectOne("member.memberSelect", member_idx);
+	}
+	
+	public void memberSelectDelete(MemberDTO dto) {
+		sqlSession.delete("member.memberSelectDelete", dto);
+	}
+
+	@Override
+	public void deleteMember(String idxs) {
+		sqlSession.delete("member.memberSelectDelete", idxs);
 	}
 	
 }

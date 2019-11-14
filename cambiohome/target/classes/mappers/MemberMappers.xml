@@ -5,57 +5,78 @@
 <mapper namespace="member">
 
 	<!-- 회원 목록 가져오기 -->
-	<select id="memberList" resultType="com.cambio.org.member.MemberDTO">
+	<select id="memberList"
+		resultType="com.cambio.org.member.MemberDTO">
 		select * from `cambio`.`member` order by member_idx desc
 	</select>
-	
+
 	<!-- 회원가입 -->
-	<insert id="insertMember" parameterType="com.cambio.org.member.MemberDTO">
+	<insert id="insertMember"
+		parameterType="com.cambio.org.member.MemberDTO">
 		insert into `cambio`.`member`
 		(member_id,member_pw,member_cpw,member_mail)
 		values
 		(#{member_id},#{member_pw},#{member_cpw},#{member_mail})
 	</insert>
-	
+
 	<!-- 회원정보 상세 보기 -->
-	<select id="viewMember" resultType="com.cambio.org.member.MemberDTO">
-		select * from `cambio`.`member` where member_id=#{member_id}
+	<select id="viewMember"
+		resultType="com.cambio.org.member.MemberDTO">
+		select * from `cambio`.`member` where
+		member_id=#{member_id}
 	</select>
-	
+
 	<!-- 회원 정보 수정 -->
 	<update id="updateMember">
 		update `cambio`.`member`
-		set member_pw=#{member_pw},member_cpw=#{member_cpw},member_mail=#{member_mail}
+		set
+		member_pw=#{member_pw},member_cpw=#{member_cpw},member_mail=#{member_mail}
 		where member_id=#{member_id}
 	</update>
-	
+
 	<!-- 관리자계정 회원정보 수정 -->
-	<update id="adminUpdate" parameterType="com.cambio.org.member.MemberDTO">
-		update member set member_id=#{member_id}, member_pw=#{member_pw}, member_cpw=#{member_cpw}, member_mail=#{member_mail}
-		where member_idx=#{member_idx}	
+	<update id="adminUpdate"
+		parameterType="com.cambio.org.member.MemberDTO">
+		update member set member_id=#{member_id},
+		member_pw=#{member_pw}, member_cpw=#{member_cpw},
+		member_mail=#{member_mail}
+		where member_idx=#{member_idx}
 	</update>
-	
+
 	<!-- 로그인 -->
-	<select id="memberlogin" resultType="com.cambio.org.member.MemberDTO">
+	<select id="memberlogin"
+		resultType="com.cambio.org.member.MemberDTO">
 		select member_id from `cambio`.`member`
-		where member_id=#{member_id} and member_pw=#{member_pw}
+		where
+		member_id=#{member_id} and member_pw=#{member_pw}
 	</select>
-	
+
 	<!-- 순번 select -->
-	<select id="memberSelect" resultType="com.cambio.org.member.MemberDTO">
-		select * from `cambio`.`member` where member_idx=#{member_idx}
+	<select id="memberSelect"
+		resultType="com.cambio.org.member.MemberDTO">
+		select * from `cambio`.`member` where
+		member_idx=#{member_idx}
 	</select>
-	
+
 	<!-- 비밀번호 체크 -->
 	<select id="checkpw">
 		select count(*) from `cambio`.`member`
-		where member_id=#{member_id} and member_pw=#{member_pw}
+		where
+		member_id=#{member_id} and member_pw=#{member_pw}
 	</select>
-	
+
 	<!-- 회원 삭제 -->
 	<delete id="deleteMember">
 		delete from `cambio`.`member`
-        where member_id=#{member_id}
+		where member_id=#{member_id}
 	</delete>
-	
+
+	<!-- select delete -->
+	<delete id="memberSelectDelete" parameterType="String">
+		delete from `cambio`.`member`
+		<where>
+			FIND_IN_SET(member_idx, #{idxs})
+		</where>
+	</delete>
+
 </mapper>

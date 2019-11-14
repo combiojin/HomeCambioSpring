@@ -24,4 +24,6 @@ public interface MemberDAO {
 	public MemberDTO updateAdmin(MemberDTO dto);
 	//순번셀렉
 	public MemberDTO memberSelect(int member_idx);
+	//
+	public void deleteMember(String idxs);
 }

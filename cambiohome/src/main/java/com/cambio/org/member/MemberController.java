@@ -151,5 +151,23 @@ public class MemberController {
 	}
 	
 	//관리자계정 회원삭제
-	
+	@RequestMapping(value = "/member/admindelete.do")
+	public String admindelete(String[] member_idx) {
+		
+		String idxs = "";
+		
+		for (int i = 0 ; i < member_idx.length ; i++ ) {
+			if ( i == member_idx.length-1) {
+				idxs = idxs + member_idx[i];
+			} else {
+				idxs = idxs + member_idx[i]+",";
+			}
+		}
+		System.out.println("idxs = "+ idxs);
+		
+		memberService.deleteMember(idxs);
+		
+		return "redirect:member_list.do";
+		
+	}
 }

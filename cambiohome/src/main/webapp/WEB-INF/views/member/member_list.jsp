@@ -8,8 +8,15 @@
 <%@include file="../head.jsp"%>
 <script type="text/javascript">
 	function dodelete() {
-		alert("삭제누름")
-		$("#delefrm").submit();
+// 		alert("삭제누름")
+// 		$("#delefrm").attr("action","${path}/member/admindelete.do");
+// 		$("#delefrm").submit();
+		if (confirm("삭제 하시겠습니까?")){ 
+			location.href="${path}/member/admindelete.do";
+		}else{ 
+			alert("삭제 취소 되었습니다."); 
+			location.href="${path}/member/member_list.do"
+		} 
 	}
 </script>
 </head>
@@ -20,19 +27,19 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<form id="delefrm" action="${path}/member/delete.do">
+				<form id="delefrm" action="${path}/member/admindelete.do">
 					<h2>회원목록</h2>
 					<table class="table table-dark table-bordered"
 						style="text-align: center;">
 						<tr>
 							<c:if test="${member.member_id eq 'admin' }">
-								<th></th>
+								<th>체크</th>
 							</c:if>
-							<th>순번</th>
+							<th>번호</th>
 							<th>이름</th>
 							<th>메일</th>
 							<c:if test="${member.member_id eq 'admin' }">
-								<th></th>
+								<th>회원수정</th>
 							</c:if>
 						</tr>
 						<c:forEach items="${list}" var="md">
@@ -45,7 +52,7 @@
 								<td>${md.member_id}</td>
 								<td>${md.member_mail}</td>
 								<c:if test="${member.member_id eq 'admin' }">
-									<td><a class="btn btn-primary"
+									<td><a class="btn btn-dark"
 										href="${path}/member/adminupdate.do?member_idx=${md.member_idx}">수정</a></td>
 								</c:if>
 							</tr>

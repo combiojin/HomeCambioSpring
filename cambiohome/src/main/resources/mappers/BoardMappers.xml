@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="board">
+
+	<!-- 게시판 목록 가져오기 -->
+	<select id="getBoardList"
+		resultType="com.cambio.org.board.BoardDTO">
+		select
+			bid,cate_cd,title,content,tag,view_cnt,reg_id,reg_dt,Edit_dt 
+		from
+			`cambio`.`board`
+	</select>
+
+	<select id="getBoardContent"
+		resultType="com.cambio.org.board.BoardDTO"
+		parameterType="com.cambio.org.board.BoardDTO">
+		select
+			bid,cate_cd,title,content,tag,view_cnt,reg_id,reg_dt,Edit_dt
+		from 
+			`cambio`.`board`
+		where 
+			bid = #{bid}
+	</select>
+
+	<!-- 게시글 작성 -->
+	<insert id="insertBoard"
+		parameterType="com.cambio.org.board.BoardDTO">
+		INSERT INTO `cambio`.`board` (CATE_CD, TITLE, CONTENT, TAG,
+		VIEW_CNT, REG_ID, REG_DT, EDIT_DT)
+		VALUES (
+		#{cate_cd}
+		, #{title}
+		, #{content}
+		, #{tag}
+		, 0
+		, #{reg_id}
+		, now()
+		, now()
+		)
+	</insert>
+
+	<!-- 게시글 수정 -->
+	<update id="updateBoard" parameterType="com.cambio.org.board.BoardDTO">
+		UPDATE `cambio`.`board` SET
+			CATE_CD = #{cate_cd}
+			, TITLE = #{title}
+			, CONTENT = #{content}
+			, TAG = #{tag}
+			, EDIT_DT = now()
+		WHERE
+			BID = ${bid}
+	</update>
+
+	<!-- 게시글 삭제 -->
+	<delete id="deleteBoard" parameterType="int">
+		DELETE FROM `cambio`.`board`
+		WHERE BID = #{bid}
+	</delete>
+	
+	<update id="updateViewCnt" parameterType="com.cambio.org.board.BoardDTO">
+		UPDATE `cambio`.`board` SET
+			VIEW_CNT = VIEW_CNT + 1
+		WHERE
+			BID = #{bid}
+	</update>
+	
+</mapper>

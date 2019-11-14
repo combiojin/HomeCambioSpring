@@ -10,7 +10,7 @@
 			<li class="nav-item"><a class="nav-link"
 				href="${path}/member/member_list.do">MemberList</a></li>
 			<li class="nav-item"><a class="nav-link"
-				href="${path}/board/index.do">Board</a></li>
+				href="${path}/board/board_list.do">Board</a></li>
 			<li class="nav-item"><a class="nav-link" href="#">Gallery</a></li>
 			<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
 		</ul>
