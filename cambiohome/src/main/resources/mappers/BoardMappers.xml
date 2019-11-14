@@ -4,20 +4,21 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="board">
 
-	<!-- 게시판 목록 가져오기 -->
+	<!-- 게시판 리스트 조회 -->
 	<select id="getBoardList"
 		resultType="com.cambio.org.board.BoardDTO">
 		select
-			bid,cate_cd,title,content,tag,view_cnt,reg_id,reg_dt,Edit_dt 
+			bid,cate_cd,title,content,tag,view_cnt,reg_id,reg_dt,edit_dt 
 		from
-			`cambio`.`board`
+			`cambio`.`board` order by bid desc
 	</select>
 
+	<!-- 게시물 상세조회 -->
 	<select id="getBoardContent"
 		resultType="com.cambio.org.board.BoardDTO"
 		parameterType="com.cambio.org.board.BoardDTO">
 		select
-			bid,cate_cd,title,content,tag,view_cnt,reg_id,reg_dt,Edit_dt
+			bid,cate_cd,title,content,tag,view_cnt,reg_id,reg_dt,edit_dt
 		from 
 			`cambio`.`board`
 		where 
@@ -27,43 +28,34 @@
 	<!-- 게시글 작성 -->
 	<insert id="insertBoard"
 		parameterType="com.cambio.org.board.BoardDTO">
-		INSERT INTO `cambio`.`board` (CATE_CD, TITLE, CONTENT, TAG,
-		VIEW_CNT, REG_ID, REG_DT, EDIT_DT)
-		VALUES (
-		#{cate_cd}
-		, #{title}
-		, #{content}
-		, #{tag}
-		, 0
-		, #{reg_id}
-		, now()
-		, now()
-		)
+		INSERT INTO `cambio`.`board` (cate_cd, title, content, tag,
+		view_cnt, reg_id, reg_dt, edit_dt)
+		VALUES (#{cate_cd}, #{title}, #{content}, #{tag}, 0, #{reg_id}, now(), now())
 	</insert>
 
 	<!-- 게시글 수정 -->
 	<update id="updateBoard" parameterType="com.cambio.org.board.BoardDTO">
 		UPDATE `cambio`.`board` SET
-			CATE_CD = #{cate_cd}
-			, TITLE = #{title}
-			, CONTENT = #{content}
-			, TAG = #{tag}
-			, EDIT_DT = now()
+			cate_cd = #{cate_cd}
+			, title = #{title}
+			, content = #{content}
+			, tag = #{tag}
+			, edit_dt = now()
 		WHERE
-			BID = ${bid}
+			bid = ${bid}
 	</update>
 
 	<!-- 게시글 삭제 -->
 	<delete id="deleteBoard" parameterType="int">
 		DELETE FROM `cambio`.`board`
-		WHERE BID = #{bid}
+		WHERE bid = #{bid}
 	</delete>
 	
 	<update id="updateViewCnt" parameterType="com.cambio.org.board.BoardDTO">
 		UPDATE `cambio`.`board` SET
-			VIEW_CNT = VIEW_CNT + 1
+			view_cnt = view_cnt + 1
 		WHERE
-			BID = #{bid}
+			bid = #{bid}
 	</update>
 	
 </mapper>

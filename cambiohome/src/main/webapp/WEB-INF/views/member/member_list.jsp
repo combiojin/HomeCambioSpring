@@ -59,11 +59,11 @@
 						</c:forEach>
 					</table>
 					<c:if test="${member.member_id eq 'admin' }">
-						<div class="col-sm-1" style="float: right; margin: 10px;">
-							<button class="btn btn-dark" onclick="dodelete();">회원삭제</button>
+						<div style="float: right; margin: 10px;">
+							<button class="btn btn-dark btn-lg" onclick="dodelete();">회원삭제</button>
 						</div>
-						<div class="col-sm-1" style="float: right; margin: 10px;">
-							<a class="btn btn-dark" href="${path}/member/admininsert.do">회원등록</a>
+						<div style="float: right; margin: 10px;">
+							<a class="btn btn-dark btn-lg" href="${path}/member/admininsert.do">회원등록</a>
 						</div>
 					</c:if>
 				</form>

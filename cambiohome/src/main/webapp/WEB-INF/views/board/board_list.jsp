@@ -9,8 +9,14 @@
 <script type="text/javascript">
 	$(document).on('click', '#btnWrite', function(e) {
 		e.preventDefault();
-		location.href = "${path}/member/admindelete.do";
+		location.href = "${path}/board/boardForm.do";
 	});
+	
+	function fn_contentView(bid) {
+		var url = "${path}/board/boardContent.do"
+		url = url + "?bid="+bid;
+		location.href = url;
+	}
 </script>
 </head>
 <body>
@@ -58,7 +64,11 @@
 									<c:forEach var="list" items="${boardList}">
 										<tr>
 											<td><c:out value="${list.bid}"></c:out></td>
-											<td><c:out value="${list.title}"></c:out></td>
+											<td>
+												<a href="#" onclick="fn_contentView(<c:out value="${list.bid}"></c:out>)">
+													<c:out value="${list.title}"></c:out>
+												</a>
+											</td>		
 											<td><c:out value="${list.reg_id}"></c:out></td>
 											<td><c:out value="${list.view_cnt}"></c:out></td>
 											<td><c:out value="${list.reg_dt}"></c:out></td>
@@ -70,7 +80,7 @@
 					</table>
 					<%-- 					<c:if test="${member.member_id eq 'admin' }"> --%>
 					<div class="col-sm-1" style="float: right; margin: 10px;">
-						<button type="button" class="btn btn-dark" id="btnWrite">작성</button>
+						<button type="button" class="btn btn-dark btn-md" id="btnWrite">작성</button>
 					</div>
 					<!-- 						<div class="col-sm-1" style="float: right; margin: 10px;"> -->
 					<%-- 							<a class="btn btn-dark" href="${path}/member/admininsert.do">회원등록</a> --%>
