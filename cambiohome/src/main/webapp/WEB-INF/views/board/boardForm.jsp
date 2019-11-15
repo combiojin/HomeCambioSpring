@@ -38,8 +38,7 @@
 		<div class="container" role="main">
 			<h2>게시물 작성</h2>
 			<form:form name="form" id="form" role="form"
-				modelAttribute="boardDTO" method="post"
-				action="${path}/board/boardProc.do">
+				modelAttribute="dto" method="post" action="${path}/board/boardProc.do">
 				<form:hidden path="bid" />
 				<input type="hidden" name="mode">
 				<div class="mb-3">

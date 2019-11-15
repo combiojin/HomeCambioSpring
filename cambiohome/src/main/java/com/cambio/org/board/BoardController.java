@@ -1,5 +1,7 @@
 package com.cambio.org.board;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,14 +28,15 @@ public class BoardController {
 
 	// 게시물 작성
 	@RequestMapping(value = "/board/boardForm.do")
-	public String boardForm() {
-		
+	public String boardForm(Model model) {
+		model.addAttribute("dto", new BoardDTO());
+
 		return "board/boardForm";
 	}
 
 	//게시글 장성 및 수정 DB저장
 	@RequestMapping(value = "/board/boardProc.do", method = RequestMethod.POST)
-	public String boardProc(@ModelAttribute("BoardDTO") BoardDTO dto, @RequestParam("mode") String mode, RedirectAttributes rttr) throws Exception {
+	public String boardProc(@ModelAttribute("dto") BoardDTO dto, @RequestParam("mode") String mode, RedirectAttributes rttr, Model model, HttpServletRequest request) throws Exception {
 
 		if(mode.equals("update")) {
 			boardService.updateBoard(dto);
@@ -57,7 +60,7 @@ public class BoardController {
 			throws Exception {
 		model.addAttribute("boardContent", boardService.getBoardContent(bid));
 		model.addAttribute("mode", mode);
-		model.addAttribute("boardDTO", new BoardDTO());
+		model.addAttribute("dto", new BoardDTO());
 		
 		return "board/boardForm";
 	}
