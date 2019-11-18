@@ -10,22 +10,23 @@
 		select
 		bid,cate_cd,title,content,tag,view_cnt,reg_id,reg_dt,edit_dt
 		from
-		`cambio`.`board` order by bid desc
-		<trim prefix="WHERE" prefixOverrides="AND|OR">
+		`cambio`.`board` 
+		<trim prefix="where" prefixOverrides="AND|OR">
 			<if
 				test="searchType=='title' and keyword != null and keyword != '' ">
-				AND title like CONCAT('%', #{keyword}, '%')
+				AND title like concat('%', #{keyword}, '%')
 			</if>
 			<if
 				test="searchType=='content' and keyword != null and keyword != '' ">
-				AND content like CONCAT('%', #{keyword}, '%')
+				AND content like concat('%', #{keyword}, '%')
 			</if>
 			<if
 				test="searchType=='reg_id' and keyword != null and keyword != '' ">
-				AND reg_id like CONCAT('%', #{keyword}, '%')
+				AND reg_id like concat('%', #{keyword}, '%')
 			</if>
 		</trim>
-		LIMIT #{startList},#{listSize}
+		order by bid desc
+		LIMIT #{startList}, #{listSize}
 	</select>
 
 	<select id="getBoardListCnt" resultType="int">
