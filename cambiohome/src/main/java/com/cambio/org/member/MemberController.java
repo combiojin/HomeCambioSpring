@@ -104,14 +104,14 @@ public class MemberController {
 	}
 
 	// 회원목록
-	@RequestMapping(value = "/member/member_list.do")
+	@RequestMapping(value = "/member/memberlist.do")
 	public String memberList(Model model, HttpSession session) {
 
 		List<MemberDTO> list = memberService.memberList();
 
 		model.addAttribute("list", list);
 
-		return "member/member_list";
+		return "member/memberlist";
 	}
 
 	//관리자계정 회원등록
@@ -126,7 +126,7 @@ public class MemberController {
 
 		memberService.insertMember(dto);
 		
-		return "redirect:member_list.do";
+		return "redirect:memberlist.do";
 	}
 	
 	//관리자계정 회원수정
@@ -147,7 +147,7 @@ public class MemberController {
 		
 		ssupdate.setAttribute("update", memberupdate);
 
-		return "redirect:member_list.do";
+		return "redirect:memberlist.do";
 	}
 	
 	//관리자계정 회원삭제
@@ -167,7 +167,7 @@ public class MemberController {
 		
 		memberService.deleteMember(idxs);
 		
-		return "redirect:member_list.do";
+		return "redirect:memberlist.do";
 		
 	}
 }

@@ -25,7 +25,7 @@
 	});
 	$(document).on('click', '#btnList', function(e) {
 		e.preventDefault();
-		location.href = "${path}/board/board_list.do";
+		location.href = "${path}/board/boardlist.do";
 
 	});
 </script>
@@ -38,7 +38,7 @@
 		<div class="container" role="main">
 			<h2>게시물 작성</h2>
 			<form:form name="form" id="form" role="form"
-				modelAttribute="dto" method="post" action="${path}/board/boardProc.do">
+				modelAttribute="dto" method="POST" action="${path}/board/boardProc.do">
 				<form:hidden path="bid" />
 				<input type="hidden" name="mode">
 				<div class="mb-3">

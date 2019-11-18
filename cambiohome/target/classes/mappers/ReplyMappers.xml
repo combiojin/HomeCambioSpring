@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boardreply">
+
+	<select id="getReplyList"
+		resultType="com.cambio.org.board.ReplyDTO">
+		SELECT
+		RID
+		, BID
+		, CONTENT
+		, REG_ID
+		, REG_DT
+		, EDIT_DT
+		FROM
+		`cambio`.`board_reply`
+		WHERE
+		BID = #{bid}
+		ORDER BY REG_DT desc
+	</select>
+
+	<insert id="saveReply"
+		parameterType="com.cambio.org.board.ReplyDTO">
+		INSERT INTO `cambio`.`board_reply`(BID, CONTENT, REG_ID, REG_DT, EDIT_DT)
+		VALUES (
+		#{bid}
+		, #{content}
+		, #{reg_id}
+		, now()
+		, now()
+		)
+	</insert>
+
+	<update id="updateReply"
+		parameterType="com.cambio.org.board.ReplyDTO">
+		UPDATE `cambio`.`board_reply` SET
+		CONTENT = #{content}
+		, EDIT_DT = now()
+		WHERE
+		RID = #{rid}
+	</update>
+
+	<delete id="deleteReply" parameterType="int">
+		DELETE FROM `cambio`.`board_reply`
+		WHERE
+		RID = #{rid}
+	</delete>
+
+</mapper>

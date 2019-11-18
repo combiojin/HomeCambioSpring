@@ -15,7 +15,7 @@
 			location.href="${path}/member/admindelete.do";
 		}else{ 
 			alert("삭제 취소 되었습니다."); 
-			location.href="${path}/member/member_list.do"
+			location.href="${path}/member/memberlist.do"
 		} 
 	}
 </script>

@@ -8,9 +8,9 @@
 			<li class="nav-item active"><a class="nav-link" href="${path}">Home</a>
 			</li>
 			<li class="nav-item"><a class="nav-link"
-				href="${path}/member/member_list.do">MemberList</a></li>
+				href="${path}/member/memberlist.do">MemberList</a></li>
 			<li class="nav-item"><a class="nav-link"
-				href="${path}/board/board_list.do">Board</a></li>
+				href="${path}/board/boardlist.do">Board</a></li>
 			<li class="nav-item"><a class="nav-link" href="#">Gallery</a></li>
 			<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
 		</ul>

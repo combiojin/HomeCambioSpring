@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.cambio.common.Pagination;
 import com.cambio.common.Search;
 import com.cambio.org.board.BoardDTO;
+import com.cambio.org.board.ReplyDTO;
 
 @Repository
 public class BoardDAOImpl implements BoardDAO{
@@ -41,6 +42,7 @@ public class BoardDAOImpl implements BoardDAO{
 	public int deleteBoard(int bid) throws Exception {
 		return sqlSession.delete("board.deleteBoard", bid);
 	}
+	@Override
 	public int updateViewCnt(int bid) throws Exception {
 		return sqlSession.update("board.updateViewCnt", bid);
 	}
@@ -53,4 +55,23 @@ public class BoardDAOImpl implements BoardDAO{
 	public int getBoardListCnt(Search search) throws Exception {
 		return sqlSession.selectOne("board.getBoardListCnt",search);
 	}
+	
+	//댓글 리스트
+	@Override
+	public List<ReplyDTO> getReplyList(int bid) throws Exception {
+		return sqlSession.selectList("boardreply.getReplyList", bid);
+	}
+	@Override
+	public int saveReply(ReplyDTO replyDTO) throws Exception {
+		return sqlSession.insert("boardreply.saveReply",replyDTO);
+	}
+	@Override
+	public int updateRelpy(ReplyDTO replyDTO) throws Exception {
+		return sqlSession.update("boardreply.updateReply",replyDTO);
+	}
+	@Override
+	public int deleteReply(int rid) throws Exception {
+		return sqlSession.delete("boardreply.deleteReply", rid);
+	}
+	
 }

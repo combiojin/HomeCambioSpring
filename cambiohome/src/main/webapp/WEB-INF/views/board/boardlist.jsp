@@ -23,7 +23,7 @@
 			var page = ((range - 2) * rangeSize) + 1;
 			var range = range - 1;
 
-			var url = "${path}/board/board_list.do";
+			var url = "${path}/board/boardlist.do";
 			url = url + "?page=" + page;
 			url = url + "&range=" + range;
 
@@ -33,7 +33,7 @@
 
 	  //페이지 번호 클릭
 		function fn_pagination(page, range, rangeSize, searchType, keyword) {
-			var url = "${path}/board/board_list.do";
+			var url = "${path}/board/boardlist.do";
 			url = url + "?page=" + page;
 			url = url + "&range=" + range;
 
@@ -45,7 +45,7 @@
 			var page = parseInt((range * rangeSize)) + 1;
 			var range = parseInt(range) + 1;
 
-			var url = "${path}/board/board_list.do";
+			var url = "${path}/board/boardlist.do";
 			url = url + "?page=" + page;
 			url = url + "&range=" + range;
 			
@@ -55,7 +55,7 @@
 		//검색 이벤트
 		$(document).on('click', '#btnSearch', function(e){
 			e.preventDefault();
-			var url = "${path}/board/board_list.do";
+			var url = "${path}/board/boardlist.do";
 			url = url + "?searchType=" + $('#searchType').val();
 			url = url + "&keyword=" + $('#keyword').val();
 			location.href = url;
@@ -70,7 +70,6 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<%-- 				<form id="delefrm" action="${path}/member/admindelete.do"> --%>
 				<h2>게시판</h2>
 				<table class="table table-dark table-bordered"
 					style="text-align: center;">

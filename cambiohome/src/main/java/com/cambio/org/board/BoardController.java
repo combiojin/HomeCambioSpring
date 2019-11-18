@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,7 +24,7 @@ public class BoardController {
 	private BoardService boardService;
 
 	// 게시판 리스트
-	@RequestMapping(value = "/board/board_list.do")
+	@RequestMapping(value = "/board/boardlist.do", method = RequestMethod.GET)
 	public String getBoardList(Model model
 			,@RequestParam(required = false,defaultValue = "1") int page
 			,@RequestParam(required = false,defaultValue = "1") int range
@@ -49,9 +50,9 @@ public class BoardController {
 		model.addAttribute("pagination", search);
 		model.addAttribute("boardList", boardService.getBoardList(search));
 		
-		return "board/board_list";
+		return "board/boardlist";
 	}
-
+	
 	// 게시물 작성
 	@RequestMapping(value = "/board/boardForm.do")
 	public String boardForm(Model model) {
@@ -70,13 +71,14 @@ public class BoardController {
 			boardService.insertBoard(dto);
 		}
 
-		return "redirect:/board/board_list.do";
+		return "redirect:/board/boardlist.do";
 	}
 
 	//게시글 상세조회
-	@RequestMapping(value = "/board/boardContent.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/board/boardContent.do", method = {RequestMethod.GET,RequestMethod.POST})
 	public String boardContent(Model model, @RequestParam("bid") int bid) throws Exception {
 		model.addAttribute("boardContent", boardService.getBoardContent(bid));
+		model.addAttribute("replyDTO", new ReplyDTO());
 		
 		return "board/boardContent";
 	}
@@ -97,7 +99,7 @@ public class BoardController {
 			throws Exception {
 		boardService.deleteBoard(bid);
 		
-		return "redirect:/board/board_list.do";
+		return "redirect:/board/boardlist.do";
 	}
 	
 //	//ExceptionHandler을 이용한 예외처리 방법

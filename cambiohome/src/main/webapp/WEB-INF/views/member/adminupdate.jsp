@@ -7,7 +7,7 @@
 <%@include file="../head.jsp"%>
 <script type="text/javascript">
 	function doCancel() {
-		location.href = "${path}/member/member_list.do";
+		location.href = "${path}/member/memberlist.do";
 	}
 </script>
 </head>
