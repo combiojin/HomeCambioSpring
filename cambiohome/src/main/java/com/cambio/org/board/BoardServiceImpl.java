@@ -5,8 +5,12 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.cambio.common.Pagination;
+import com.cambio.common.Search;
 import com.cambio.org.board.BoardDTO;
+import com.cambio.org.error.NotFoundException;
 
 @Service
 public class BoardServiceImpl implements BoardService{
@@ -14,18 +18,35 @@ public class BoardServiceImpl implements BoardService{
 	@Autowired
 	private BoardDAO boardDAO;
 
-	public List<BoardDTO> getBoardList() throws Exception {
-		return boardDAO.getBoardList();
-	}
+//	public List<BoardDTO> getBoardList(Pagination pagination) throws Exception {
+//		return boardDAO.getBoardList(pagination);
+//	}
+	
+	@Override
+	public List<BoardDTO> getBoardList(Search search) throws Exception {
+	return boardDAO.getBoardList(search);
+}
 	
 	@Override
 	public void insertBoard(BoardDTO dto) throws Exception {
 		boardDAO.insertBoard(dto);
 	}
 	
+	@Transactional
+	@Override
 	public BoardDTO getBoardContent(int bid) throws Exception {
+		BoardDTO dto = new BoardDTO();
 		boardDAO.updateViewCnt(bid);
-		return boardDAO.getBoardContent(bid);
+		dto = boardDAO.getBoardContent(bid);
+//		try {
+//			dto.setBid(bid);
+//			dto.setCate_cd("11111111111111111111111111111111111111111111111111111111111111111");
+//			boardDAO.updateBoard(dto);	
+//		} catch (RuntimeException e) {
+//			throw new NotFoundException();
+//		}
+//				
+		return dto;
 	}
 	
 	@Override
@@ -38,4 +59,13 @@ public class BoardServiceImpl implements BoardService{
 		boardDAO.deleteBoard(bid);
 	}
 	
+//	@Override
+//	public int getBoardListCnt() throws Exception {
+//		return boardDAO.getBoardListCnt();
+//	}
+	
+	@Override
+	public int getBoardListCnt(Search search) throws Exception {
+		return boardDAO.getBoardListCnt(search);
+	}
 }

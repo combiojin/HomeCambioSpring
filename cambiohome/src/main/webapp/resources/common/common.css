@@ -29,3 +29,15 @@
 	margin: 10pt;
 	padding-bottom: 10pt;
 }
+
+.pagecolor {
+	background-color: black;
+	border-color: black;
+	color: white;
+}
+
+.pagecolor:hover {
+	background-color: white;
+	border-color: white;
+	color: black;
+}

@@ -8,9 +8,44 @@
 	<select id="getBoardList"
 		resultType="com.cambio.org.board.BoardDTO">
 		select
-			bid,cate_cd,title,content,tag,view_cnt,reg_id,reg_dt,edit_dt 
+		bid,cate_cd,title,content,tag,view_cnt,reg_id,reg_dt,edit_dt
 		from
-			`cambio`.`board` order by bid desc
+		`cambio`.`board` order by bid desc
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if
+				test="searchType=='title' and keyword != null and keyword != '' ">
+				AND title like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if
+				test="searchType=='content' and keyword != null and keyword != '' ">
+				AND content like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if
+				test="searchType=='reg_id' and keyword != null and keyword != '' ">
+				AND reg_id like CONCAT('%', #{keyword}, '%')
+			</if>
+		</trim>
+		LIMIT #{startList},#{listSize}
+	</select>
+
+	<select id="getBoardListCnt" resultType="int">
+		SELECT
+		count(*) as listCnt
+		FROM
+		`cambio`.`board`
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="keyword != null and keyword != '' ">
+				<if test="searchType=='title'">
+					AND title like CONCAT('%', #{keyword}, '%')
+				</if>
+				<if test="searchType=='content'">
+					AND content like CONCAT('%', #{keyword}, '%')
+				</if>
+				<if test="searchType=='reg_id'">
+					AND reg_id like CONCAT('%', #{keyword}, '%')
+				</if>
+			</if>
+		</trim>
 	</select>
 
 	<!-- 게시물 상세조회 -->
@@ -18,44 +53,49 @@
 		resultType="com.cambio.org.board.BoardDTO"
 		parameterType="com.cambio.org.board.BoardDTO">
 		select
-			bid,cate_cd,title,content,tag,view_cnt,reg_id,reg_dt,edit_dt
-		from 
-			`cambio`.`board`
-		where 
-			bid = #{bid}
+		bid,cate_cd,title,content,tag,view_cnt,reg_id,reg_dt,edit_dt
+		from
+		`cambio`.`board`
+		where
+		bid = #{bid}
 	</select>
 
 	<!-- 게시글 작성 -->
 	<insert id="insertBoard"
 		parameterType="com.cambio.org.board.BoardDTO">
-		INSERT INTO `cambio`.`board` (cate_cd, title, content, tag,
+		INSERT INTO `cambio`.`board` (cate_cd, title, content,
+		tag,
 		view_cnt, reg_id, reg_dt, edit_dt)
-		VALUES (#{cate_cd}, #{title}, #{content}, #{tag}, 0, #{reg_id}, now(), now())
+		VALUES (#{cate_cd}, #{title},
+		#{content}, #{tag}, 0, #{reg_id}, now(), now())
 	</insert>
 
 	<!-- 게시글 수정 -->
-	<update id="updateBoard" parameterType="com.cambio.org.board.BoardDTO">
+	<update id="updateBoard"
+		parameterType="com.cambio.org.board.BoardDTO">
 		UPDATE `cambio`.`board` SET
-			cate_cd = #{cate_cd}
-			, title = #{title}
-			, content = #{content}
-			, tag = #{tag}
-			, edit_dt = now()
+		cate_cd = #{cate_cd}
+		, title = #{title}
+		, content = #{content}
+		, tag = #{tag}
+		, edit_dt = now()
 		WHERE
-			bid = ${bid}
+		bid = ${bid}
 	</update>
 
 	<!-- 게시글 삭제 -->
 	<delete id="deleteBoard" parameterType="int">
-		DELETE FROM `cambio`.`board`
+		DELETE FROM
+		`cambio`.`board`
 		WHERE bid = #{bid}
 	</delete>
-	
-	<update id="updateViewCnt" parameterType="com.cambio.org.board.BoardDTO">
+
+	<update id="updateViewCnt"
+		parameterType="com.cambio.org.board.BoardDTO">
 		UPDATE `cambio`.`board` SET
-			view_cnt = view_cnt + 1
+		view_cnt = view_cnt + 1
 		WHERE
-			bid = #{bid}
+		bid = #{bid}
 	</update>
-	
+
 </mapper>
