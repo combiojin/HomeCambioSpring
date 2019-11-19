@@ -55,6 +55,7 @@
 					<label for="content">내용</label>
 					<form:textarea path="content" rows="5" class="form-control"
 						name="content" id="content" placeholder="내용을 입력해 주세요" />
+						
 				</div>
 				<div class="mb-3">
 					<label for="tag">TAG</label>
@@ -68,5 +69,7 @@
 			</div>
 		</div>
 	</article>
+	<script src="${path}/resources/js/ckeditor.js"></script>			
 </body>
+
 </html>

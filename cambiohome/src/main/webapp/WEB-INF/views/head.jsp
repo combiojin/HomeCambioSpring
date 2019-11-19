@@ -39,5 +39,7 @@
 <!-- common CSS -->
 <link rel="stylesheet" href="${path}/resources/common/common.css">
 
+<!-- CkEditor 5 -->
+<script src="https://cdn.ckeditor.com/ckeditor5/15.0.0/classic/ckeditor.js"></script>
 
 
