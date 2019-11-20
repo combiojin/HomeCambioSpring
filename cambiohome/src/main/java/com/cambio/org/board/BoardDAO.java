@@ -18,6 +18,8 @@ public interface BoardDAO {
 //	public int getBoardListCnt() throws Exception;
 	public int getBoardListCnt(Search search) throws Exception;
 	
+	public void deleteSelectBoard(String idxs);
+	
 	//댓글 리스트
 	public List<ReplyDTO> getReplyList(int bid) throws Exception;
 	public int saveReply(ReplyDTO replyDTO) throws Exception;

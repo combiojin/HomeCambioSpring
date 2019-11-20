@@ -17,8 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.cambio.common.Search;
+
 @Controller
-//@RequestMapping(value = "/member")
 public class MemberController {
 
 	@Autowired
@@ -32,7 +33,7 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/member/loginProc.do")
-	public String loginProc(MemberDTO dto, HttpServletRequest request, RedirectAttributes ra) {
+	public String loginProc(MemberDTO dto, HttpServletRequest request) {
 
 		HttpSession session = request.getSession();
 
@@ -40,7 +41,6 @@ public class MemberController {
 
 		if (login == null) {
 			session.setAttribute("member", null);
-			ra.addAttribute("msg", false);
 		} else {
 			session.setAttribute("member", login);
 		}
@@ -48,8 +48,8 @@ public class MemberController {
 		return "home";
 
 	}
-	
-	//로그아웃
+
+	// 로그아웃
 	@RequestMapping(value = "/member/logout.do")
 	public String logout(Model model, HttpSession session) {
 
@@ -61,8 +61,8 @@ public class MemberController {
 	// 마이페이지
 	@RequestMapping(value = "/member/mypage.do")
 	public String mypage(Model model, @RequestParam String member_id, MemberDTO dto) {
-		
-		model.addAttribute("mypage",memberService.viewMember(member_id));
+
+		model.addAttribute("mypage", memberService.viewMember(member_id));
 
 		return "member/mypage";
 	}
@@ -79,10 +79,10 @@ public class MemberController {
 	@RequestMapping(value = "/member/delete.do")
 	public String delete(Model model, MemberDTO dto, HttpSession session) {
 
-		MemberDTO member = (MemberDTO)session.getAttribute("member");
+		MemberDTO member = (MemberDTO) session.getAttribute("member");
 
 		memberService.deleteMember(member);
-		
+
 		session.invalidate();
 
 		return "home";
@@ -105,69 +105,87 @@ public class MemberController {
 
 	// 회원목록
 	@RequestMapping(value = "/member/memberlist.do")
-	public String memberList(Model model, HttpSession session) {
+	public String memberList(Model model
+			,@RequestParam(required = false, defaultValue = "1") int page
+			,@RequestParam(required = false, defaultValue = "1") int range
 
-		List<MemberDTO> list = memberService.memberList();
+			,@RequestParam(required = false, defaultValue = "member_id") String searchType
+			,@RequestParam(required = false) String keyword, HttpSession session)
+			throws Exception {
 
-		model.addAttribute("list", list);
+	// 검색
+	Search search = new Search();
+	search.setSearchType(searchType);
+	search.setKeyword(keyword);
+		
+	//전체 게시글 개수
+	int listCnt = memberService.memberListCnt(search);
+	
+	search.pageInfo(page,range,listCnt);
+	
+//	List<MemberDTO> list = memberService.memberList();
+//	model.addAttribute("list", list);
+	
+	model.addAttribute("pagination", search);
+	model.addAttribute("memberlist", memberService.memberList(search));
 
-		return "member/memberlist";
+	return "member/memberlist";
 	}
 
-	//관리자계정 회원등록
+	// 관리자계정 회원등록
 	@RequestMapping(value = "/member/admininsert.do")
 	public String admininsert() throws Exception {
 
 		return "member/admininsert";
 	}
-	
+
 	@RequestMapping(value = "/member/admininsertProc.do")
 	public String admininsertPorc(Model model, MemberDTO dto) {
 
 		memberService.insertMember(dto);
-		
+
 		return "redirect:memberlist.do";
 	}
-	
-	//관리자계정 회원수정
+
+	// 관리자계정 회원수정
 	@RequestMapping(value = "/member/adminupdate.do")
 	public String adminupdate(Model model, @RequestParam int member_idx, MemberDTO dto) {
-		
-		model.addAttribute("memberselect",memberService.memberSelect(member_idx));
+
+		model.addAttribute("memberselect", memberService.memberSelect(member_idx));
 
 		return "member/adminupdate";
 	}
-	
+
 	@RequestMapping(value = "/member/adminupdateProc.do")
 	public String adminupdateProc(Model model, HttpServletRequest request, HttpSession session, MemberDTO dto) {
-		
+
 		HttpSession ssupdate = request.getSession();
-		
+
 		MemberDTO memberupdate = memberService.updateAdmin(dto);
-		
+
 		ssupdate.setAttribute("update", memberupdate);
 
 		return "redirect:memberlist.do";
 	}
-	
-	//관리자계정 회원삭제
+
+	// 관리자계정 회원삭제
 	@RequestMapping(value = "/member/admindelete.do")
 	public String admindelete(String[] member_idx) {
-		
+
 		String idxs = "";
-		
-		for (int i = 0 ; i < member_idx.length ; i++ ) {
-			if ( i == member_idx.length-1) {
+
+		for (int i = 0; i < member_idx.length; i++) {
+			if (i == member_idx.length - 1) {
 				idxs = idxs + member_idx[i];
 			} else {
-				idxs = idxs + member_idx[i]+",";
+				idxs = idxs + member_idx[i] + ",";
 			}
 		}
-		System.out.println("idxs = "+ idxs);
-		
+		System.out.println("idxs = " + idxs);
+
 		memberService.deleteMember(idxs);
-		
+
 		return "redirect:memberlist.do";
-		
+
 	}
 }

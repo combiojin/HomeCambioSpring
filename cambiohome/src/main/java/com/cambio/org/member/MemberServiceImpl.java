@@ -5,16 +5,27 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cambio.common.Search;
+
 @Service
 public class MemberServiceImpl implements MemberService{
 	
 	@Autowired
 	MemberDAO memberDao;
 	
+//	@Override
+//	public List<MemberDTO> memberList(){
+//		return memberDao.memberList();
+//	}
 	@Override
-	public List<MemberDTO> memberList(){
-		return memberDao.memberList();
+	public List<MemberDTO> memberList(Search search) throws Exception{
+		return memberDao.memberList(search);
 	}
+	@Override
+	public int memberListCnt(Search search) throws Exception{
+		return memberDao.memberListCnt(search);
+	}
+
 	@Override
 	public void insertMember(MemberDTO dto) {
 		memberDao.insertMember(dto);

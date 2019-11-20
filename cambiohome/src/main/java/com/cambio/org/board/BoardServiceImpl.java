@@ -68,6 +68,12 @@ public class BoardServiceImpl implements BoardService {
 	public int getBoardListCnt(Search search) throws Exception {
 		return boardDAO.getBoardListCnt(search);
 	}
+	
+	@Override
+	public void deleteSelectBoard(String idxs) {
+		boardDAO.deleteSelectBoard(idxs);
+	}
+		
 
 	// 댓글 리스트
 	@Override

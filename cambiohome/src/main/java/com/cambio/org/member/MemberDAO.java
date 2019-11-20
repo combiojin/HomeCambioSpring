@@ -2,12 +2,17 @@ package com.cambio.org.member;
 
 import java.util.List;
 
+import com.cambio.common.Search;
+import com.cambio.org.board.BoardDTO;
 import com.cambio.org.member.MemberDTO;
 
 public interface MemberDAO {
 
 	//회원목록
-	public List<MemberDTO> memberList();
+//	public List<MemberDTO> memberList();
+	public List<MemberDTO> memberList(Search search) throws Exception;
+	
+	public int memberListCnt(Search search) throws Exception;
 	//회원가입
 	public void insertMember(MemberDTO dto);
 	//회원정보보기
@@ -24,6 +29,6 @@ public interface MemberDAO {
 	public MemberDTO updateAdmin(MemberDTO dto);
 	//순번셀렉
 	public MemberDTO memberSelect(int member_idx);
-	//
+	//관리자삭제
 	public void deleteMember(String idxs);
 }

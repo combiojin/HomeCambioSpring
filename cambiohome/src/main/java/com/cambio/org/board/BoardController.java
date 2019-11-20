@@ -1,6 +1,7 @@
 package com.cambio.org.board;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +18,6 @@ import com.cambio.common.Pagination;
 import com.cambio.common.Search;
 
 @Controller
-@RequestMapping
 public class BoardController {
 
 	@Autowired
@@ -31,6 +31,7 @@ public class BoardController {
 			
 			,@RequestParam(required = false,defaultValue = "title") String searchType
 			,@RequestParam(required = false) String keyword
+			,HttpSession session
 			) throws Exception {
 		
 		//검색
@@ -108,5 +109,26 @@ public class BoardController {
 //		model.addAttribute("exception", e);
 //		return "error/exception";
 //	}
+	
+	//관리자계정 글삭제
+	@RequestMapping(value = "/board/admindelete.do")
+	public String admindelete(String[] bid) {
+
+		String idxs = "";
+
+		for (int i = 0; i < bid.length; i++) {
+			if (i == bid.length - 1) {
+				idxs = idxs + bid[i];
+			} else {
+				idxs = idxs + bid[i] + ",";
+			}
+		}
+		System.out.println("idxs = " + idxs);
+
+		boardService.deleteSelectBoard(idxs);
+
+		return "redirect:boardlist.do";
+
+	}
 
 }

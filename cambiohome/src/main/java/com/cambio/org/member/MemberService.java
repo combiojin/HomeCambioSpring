@@ -2,11 +2,15 @@ package com.cambio.org.member;
 
 import java.util.List;
 
+import com.cambio.common.Search;
 import com.cambio.org.member.MemberDTO;
 
 public interface MemberService {
 	
-	public List<MemberDTO> memberList();
+//	public List<MemberDTO> memberList();
+	public List<MemberDTO> memberList(Search search) throws Exception;
+	public int memberListCnt(Search search) throws Exception;
+
 	public void insertMember(MemberDTO dto);
 	public MemberDTO viewMember(String member_id);
 	public void deleteMember(MemberDTO dto);

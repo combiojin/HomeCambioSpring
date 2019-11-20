@@ -7,7 +7,32 @@
 	<!-- 회원 목록 가져오기 -->
 	<select id="memberList"
 		resultType="com.cambio.org.member.MemberDTO">
-		select * from `cambio`.`member` order by member_idx desc
+		select
+		*
+		from
+		`cambio`.`member`
+		<trim prefix="where" prefixOverrides="AND|OR">
+			<if
+				test="searchType=='member_id' and keyword != null and keyword != '' ">
+				AND member_id like concat('%', #{keyword}, '%')
+			</if>
+		</trim>
+		order by member_idx desc
+		LIMIT #{startList}, #{listSize}
+	</select>
+
+	<select id="memberListCnt" resultType="int">
+		SELECT
+		count(*) as listCnt
+		FROM
+		`cambio`.`member`
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="keyword != null and keyword != '' ">
+				<if test="searchType=='member_id'">
+					AND member_id like CONCAT('%', #{keyword}, '%')
+				</if>
+			</if>
+		</trim>
 	</select>
 
 	<!-- 회원가입 -->
@@ -68,7 +93,8 @@
 	<!-- 회원 삭제 -->
 	<delete id="deleteMember">
 		delete from `cambio`.`member`
-		where member_id=#{member_id}
+		where
+		member_id=#{member_id}
 	</delete>
 
 	<!-- select delete -->

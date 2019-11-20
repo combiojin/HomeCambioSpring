@@ -10,7 +10,7 @@
 		select
 		bid,cate_cd,title,content,tag,view_cnt,reg_id,reg_dt,edit_dt
 		from
-		`cambio`.`board` 
+		`cambio`.`board`
 		<trim prefix="where" prefixOverrides="AND|OR">
 			<if
 				test="searchType=='title' and keyword != null and keyword != '' ">
@@ -76,12 +76,14 @@
 		parameterType="com.cambio.org.board.BoardDTO">
 		UPDATE `cambio`.`board` SET
 		cate_cd = #{cate_cd}
-		, title = #{title}
+		, title =
+		#{title}
 		, content = #{content}
 		, tag = #{tag}
 		, edit_dt = now()
 		WHERE
-		bid = ${bid}
+		bid
+		= ${bid}
 	</update>
 
 	<!-- 게시글 삭제 -->
@@ -98,5 +100,13 @@
 		WHERE
 		bid = #{bid}
 	</update>
+
+	<!-- select delete -->
+	<delete id="boardSelectDelete" parameterType="String">
+		delete from `cambio`.`board`
+		<where>
+			FIND_IN_SET(bid, #{idxs})
+		</where>
+	</delete>
 
 </mapper>

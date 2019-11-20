@@ -8,6 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.cambio.common.Search;
+
 @Repository
 public class MemberDAOImpl implements MemberDAO {
 
@@ -15,10 +17,19 @@ public class MemberDAOImpl implements MemberDAO {
 	SqlSession sqlSession;
 
 	// 회원목록
+//	@Override
+//	public List<MemberDTO> memberList() {
+//		return sqlSession.selectList("member.memberList");
+//	}
 	@Override
-	public List<MemberDTO> memberList() {
-		return sqlSession.selectList("member.memberList");
+	public List<MemberDTO> memberList(Search search) throws Exception {
+		return sqlSession.selectList("member.memberList", search);
 	}
+	@Override
+	public int memberListCnt(Search search) throws Exception{
+		return sqlSession.selectOne("member.memberListCnt",search);
+	}
+
 
 	// 회원가입
 	@Override

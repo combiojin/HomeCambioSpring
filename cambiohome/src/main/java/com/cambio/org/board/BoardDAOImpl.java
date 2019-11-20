@@ -56,6 +56,10 @@ public class BoardDAOImpl implements BoardDAO{
 		return sqlSession.selectOne("board.getBoardListCnt",search);
 	}
 	
+	@Override
+	public void deleteSelectBoard(String idxs) {
+		sqlSession.delete("board.boardSelectDelete", idxs);
+	}
 	//댓글 리스트
 	@Override
 	public List<ReplyDTO> getReplyList(int bid) throws Exception {
