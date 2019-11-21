@@ -42,3 +42,7 @@
 <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
 <script src="https://unpkg.com/swiper/js/swiper.js"></script>
 <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+
+<!-- websocket -->
+<script type="text/javascript" src="${path}/resources/js/json2.js" ></script>
+<script type="text/javascript" src="${path}/resources/js/sockjs.min.js"></script>

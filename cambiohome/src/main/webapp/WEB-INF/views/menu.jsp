@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="head.jsp" %>	
+<%@ include file="head.jsp"%>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
 	<div
 		class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
@@ -12,7 +12,8 @@
 			<li class="nav-item"><a class="nav-link"
 				href="${path}/board/boardlist.do">Board</a></li>
 			<li class="nav-item"><a class="nav-link" href="#">Gallery</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+			<li class="nav-item"><a class="nav-link"
+				href="${path}/chat/chat.do">Chat</a></li>
 		</ul>
 	</div>
 	<div class="mx-auto order-0">
@@ -34,7 +35,8 @@
 			</c:if>
 			<c:if test="${member != null}">
 				<li class="nav-item"><a class="nav-link"
-					href="${path}/member/mypage.do?member_id=${member.member_id}"><i class="fas fa-user"></i>마이페이지</a></li>
+					href="${path}/member/mypage.do?member_id=${member.member_id}"><i
+						class="fas fa-user"></i>마이페이지</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="${path}/member/logout.do"><i class="fas fa-sign-out-alt"></i>로그아웃</a></li>
 			</c:if>
