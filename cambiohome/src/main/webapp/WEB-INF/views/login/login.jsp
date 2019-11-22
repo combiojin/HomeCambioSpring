@@ -14,12 +14,12 @@
 </head>
 <body>
 	<!-- menu -->
-	<%@include file="../menu.jsp" %>
+	<%@include file="../menu.jsp"%>
 	<!-- 로그인 -->
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<h2>회원가입</h2>
+				<h2>LOGIN</h2>
 				<form action="${path}/member/loginProc.do">
 					<div class="form-group">
 						<span><i class="fas fa-user"></i></span> <input type="text"
@@ -31,11 +31,11 @@
 							class="form-control" id="member_pw" placeholder="Password"
 							name="member_pw">
 					</div>
-					<c:if test="${msg == false }">	
-						<div class="form-group">
-							<p class="font-weight-bold" style="text-align: center; color:#f00;">로그인에 실패했습니다. 아이디 또는 비밀번호를 다시 입력해주십시오.</p>
+					<div class="form-group">
+						<div id="naver_id_login" style="text-align: center">
+							<a href="${url}"> <img width="223" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" /></a>
 						</div>
-					</c:if>		
+					</div>
 					<button type="submit" class="btn btn-dark" onclick="doCheck();">로그인</button>
 					<button type="button" class="btn btn-dark" onclick="doCancel();">취소</button>
 				</form>

@@ -27,13 +27,14 @@
 	</div>
 	<div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
 		<ul class="navbar-nav ml-auto">
-			<c:if test="${member == null }">
+			<li>${sessionScope.member}</li>
+			<c:if test="${sessionScope.member == null}">
 				<li class="nav-item"><a class="nav-link"
 					href="${path}/member/signup.do"><i class="fas fa-user-plus"></i>회원가입</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="${path}/member/login.do"><i class="far fa-user"></i>로그인</a></li>
 			</c:if>
-			<c:if test="${member != null}">
+			<c:if test="${sessionScope.member != null}">
 				<li class="nav-item"><a class="nav-link"
 					href="${path}/member/mypage.do?member_id=${member.member_id}"><i
 						class="fas fa-user"></i>마이페이지</a></li>
