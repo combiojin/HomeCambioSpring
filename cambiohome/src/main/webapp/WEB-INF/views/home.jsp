@@ -8,7 +8,6 @@
 	charset="UTF-8">
 <title>Home</title>
 <%@include file="head.jsp"%>
-
 <style type="text/css">
 /* <!--Demo styles --> */
 html, body {
@@ -71,6 +70,7 @@ body {
 		});
 	</script>
 	<!-- 추후 넣어야 할 것! -->
+
 	<!-- 뭘 넣어야 할까? -->
 </body>
 </html>
