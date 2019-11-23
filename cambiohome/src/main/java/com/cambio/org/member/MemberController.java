@@ -68,7 +68,7 @@ public class MemberController {
 			session.setAttribute("member", login);
 		}
 
-		return "home";
+		return "login/loginSuccess";
 
 	}
 

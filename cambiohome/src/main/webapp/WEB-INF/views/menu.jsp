@@ -27,7 +27,6 @@
 	</div>
 	<div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
 		<ul class="navbar-nav ml-auto">
-			<li>${sessionScope.member}</li>
 			<c:if test="${sessionScope.member == null}">
 				<li class="nav-item"><a class="nav-link"
 					href="${path}/member/signup.do"><i class="fas fa-user-plus"></i>회원가입</a></li>

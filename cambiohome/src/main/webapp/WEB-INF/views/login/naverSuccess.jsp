@@ -27,14 +27,17 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div
-					style="background-color:black; width: 100%; height: 50px; text-align: center; color: white;">
-					<h3>SIST Naver_Login Success</h3>
+					style="background-color: black; width: 100%; height: 50px; text-align: center; color: white;">
+					<h3>CamBIo Naver_Login Success</h3>
 				</div>
 				<br>
 				<h2 style="text-align: center" id="name"></h2>
 				<h4 style="text-align: center" id="email"></h4>
-				<button type="button" class="btn btn-dark"
-					style="text-align: center;" onclick="doCancel();">확인</button>
+				<div class="col-md-12">
+					<div style="text-align: center;">
+						<button type="button" class="btn btn-dark" onclick="doCancel();">확인</button>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
