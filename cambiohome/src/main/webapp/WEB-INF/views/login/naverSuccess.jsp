@@ -27,14 +27,15 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div
-					style="background-color: #15a181; width: 100%; height: 50px; text-align: center; color: white;">
+					style="background-color:black; width: 100%; height: 50px; text-align: center; color: white;">
 					<h3>SIST Naver_Login Success</h3>
 				</div>
 				<br>
 				<h2 style="text-align: center" id="name"></h2>
 				<h4 style="text-align: center" id="email"></h4>
+				<button type="button" class="btn btn-dark"
+					style="text-align: center;" onclick="doCancel();">확인</button>
 			</div>
-			<button type="button" class="btn btn-dark" onclick="doCancel();">확인</button>
 		</div>
 	</div>
 </body>

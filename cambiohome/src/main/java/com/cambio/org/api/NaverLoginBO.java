@@ -23,7 +23,7 @@ public class NaverLoginBO {
 	// state: 애플리케이션이 생성한 상태 토큰
 	private final static String CLIENT_ID = "KhEANtvjgFowIgM3Fu8Z";
 	private final static String CLIENT_SECRET = "p2GafAntUu";
-	private final static String REDIRECT_URI = "http://localhost:9000/org/";
+	private final static String REDIRECT_URI = "http://localhost:9000/org/member/navercallback.do";
 	private final static String SESSION_STATE = "oauth_state";
 	/* 프로필 조회 API URL */
 	private final static String PROFILE_API_URL = "https://openapi.naver.com/v1/nid/me";
