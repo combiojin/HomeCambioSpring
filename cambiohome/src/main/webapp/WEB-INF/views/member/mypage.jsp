@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,45 +8,50 @@
 <%@include file="../head.jsp"%>
 <script type="text/javascript">
 	function doCancel() {
-		location.href="/org";
+		location.href = "/org";
 	}
 	function doDrop() {
-		if (confirm("탈퇴 하시겠습니까?")){ 
-			location.href="${path}/member/delete.do";
-		}else{ 
-			alert("탈퇴 취소 되었습니다."); 
-			location.href="${path}/member/mypage.do"
-		} 
-		
+		if (confirm("탈퇴 하시겠습니까?")) {
+			location.href = "${path}/member/delete.do";
+		} else {
+			alert("탈퇴 취소 되었습니다.");
+			location.href = "${path}/member/mypage.do"
+		}
+
 	}
 </script>
 </head>
 <body>
 	<!-- menu -->
-	<%@include file="../menu.jsp" %>
+	<%@include file="../menu.jsp"%>
 	<!-- 회원가입 -->
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<h2>회원가입</h2>
+				<div
+					style="background-color: black; width: 100%; height: 50px; text-align: center; color: white;">
+					<h2 style="text-align: center;">CamBio MyPage</h2>
+				</div>
 				<form action="${path}/member/mypageProc.do">
 					<div class="form-group">
 						<span><i class="fas fa-user"></i></span> <input type="text"
-							class="form-control" id="member_id" placeholder="Id" name="member_id" value="${member.member_id}" readonly="readonly">
+							class="form-control" id="member_id" placeholder="Id"
+							name="member_id" value="${member.member_id}" readonly="readonly">
 					</div>
 					<div class="form-group">
 						<span><i class="fas fa-key"></i></span> <input type="password"
-							class="form-control" id="member_pw" placeholder="Password" name="member_pw" >
+							class="form-control" id="member_pw" placeholder="Password"
+							name="member_pw">
 					</div>
 					<div class="form-group">
 						<span><i class="fas fa-key"></i></span> <input type="password"
-							class="form-control" id="member_cpw" placeholder="Confirm Password"
-							name="member_cpw" >
+							class="form-control" id="member_cpw"
+							placeholder="Confirm Password" name="member_cpw">
 					</div>
 					<div class="form-group">
 						<span><i class="fas fa-envelope"></i></span> <input type="email"
 							class="form-control" id="member_mail" placeholder="E-mail"
-							name="member_mail" value="${mypage.member_mail}" >
+							name="member_mail" value="${mypage.member_mail}">
 					</div>
 					<button type="submit" class="btn btn-dark">수정</button>
 					<button type="button" class="btn btn-dark" onclick="doDrop();">탈퇴</button>

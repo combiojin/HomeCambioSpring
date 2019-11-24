@@ -10,54 +10,58 @@
 	var sock = null;
 	var message = {};
 
-	$(document).ready(function() {
-		chatSock = new SockJS("/org/echo-ws");
-		
-		chatSock.onopen = function() {
-			message = {};
-			message.message = "반갑습니다.";
-			message.type = "all";
-			message.to = "all";
-			chatSock.send(JSON.stringify(message));
-		};
+	$(document).ready(
+			function() {
+				chatSock = new SockJS("/org/echo-ws");
 
-		chatSock.onmessage = function(evt) {
-			$("#chatMessage").append(evt.data);
-			$("#chatMessage").append("<br />");
-			$("#chatMessage").scrollTop(99999999);
-		};
+				chatSock.onopen = function() {
+					message = {};
+					message.message = "반갑습니다.";
+					message.type = "all";
+					message.to = "all";
+					chatSock.send(JSON.stringify(message));
+				};
 
-		chatSock.onclose = function() {
-			// sock.send("채팅을 종료합니다.");
-		}
+				chatSock.onmessage = function(evt) {
+					$("#chatMessage").append(evt.data);
+					$("#chatMessage").append("<br />");
+					$("#chatMessage").scrollTop(99999999);
+				};
 
-		$("#message").keydown(function(key) {
-			if (key.keyCode == 13) {
-				$("#sendMessage").click();
-			}
-		});
-
-		$("#sendMessage").click(function() {
-			if ($("#message").val() != "") {
-
-				message = {};
-				message.message = $("#message").val();
-				message.type = "all";
-				message.to = "all";
-
-				var to = $("#to").val();
-				if (to != "") {
-					message.type = "one";
-					message.to = to;
+				chatSock.onclose = function() {
+					// sock.send("채팅을 종료합니다.");
 				}
 
-// 				chatSock.send(JSON.stringify(message));
-				$("#chatMessage").append("나 ->  " + $("#message").val() + "<br/>");
-				$("#chatMessage").scrollTop(99999999);
-				$("#message").val("");
-			}
-		});
-});
+				$("#message").keydown(function(key) {
+					if (key.keyCode == 13) {
+						$("#sendMessage").click();
+					}
+				});
+
+				$("#sendMessage").click(
+						function() {
+							if ($("#message").val() != "") {
+
+								message = {};
+								message.message = $("#message").val();
+								message.type = "all";
+								message.to = "all";
+
+								var to = $("#to").val();
+								if (to != "") {
+									message.type = "one";
+									message.to = to;
+								}
+
+								// 				chatSock.send(JSON.stringify(message));
+								$("#chatMessage").append(
+										"나 ->  " + $("#message").val()
+												+ "<br/>");
+								$("#chatMessage").scrollTop(99999999);
+								$("#message").val("");
+							}
+						});
+			});
 </script>
 </head>
 <body>
@@ -66,11 +70,16 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12" style="text-align: center;">
-				<div id="chatMessage" style="overFlow: auto; height:500px; max-height: 500px; text-align: left; border: 1px solid;"></div>
-				<input type="text" id="message" placeholder="메시지 내용" /> 
-				<input type="text" id="to" placeholder="귓속말대상" />
-				<input type="button" class="btn btn-dark btn-sm" id="sendMessage" value="엔터" />
-				
+				<div
+					style="background-color: black; width: 100%; height: 50px; text-align: center; color: white;">
+					<h2 style="text-align: center;">CamBio Chat</h2>
+				</div>
+				<div id="chatMessage"
+					style="overFlow: auto; height: 500px; max-height: 500px; text-align: left; border: 1px solid;"></div>
+				<input type="text" id="message" placeholder="메시지 내용" /> <input
+					type="text" id="to" placeholder="귓속말대상" /> <input type="button"
+					class="btn btn-dark btn-sm" id="sendMessage" value="엔터" />
+
 			</div>
 		</div>
 	</div>

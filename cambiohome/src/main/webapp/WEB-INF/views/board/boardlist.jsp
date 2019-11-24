@@ -78,7 +78,10 @@
 		<div class="row">
 			<div class="col-md-12">
 				<form id="delefrm" action="${path}/board/admindelete.do">
-					<h2>게시판</h2>
+					<div
+						style="background-color: black; width: 100%; height: 50px; text-align: center; color: white;">
+						<h2 style="text-align: center;">CamBio BoardList</h2>
+					</div>
 					<table class="table table-dark table-bordered"
 						style="text-align: center;">
 						<colgroup>

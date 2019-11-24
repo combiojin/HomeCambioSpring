@@ -67,13 +67,16 @@
 		<div class="row">
 			<div class="col-md-12">
 				<form id="delefrm" action="${path}/member/admindelete.do">
-					<h2>회원목록</h2>
+					<div
+						style="background-color: black; width: 100%; height: 50px; text-align: center; color: white;">
+						<h2 style="text-align: center;">CamBio MemberList</h2>
+					</div>
 					<table class="table table-dark table-bordered"
 						style="text-align: center;">
 						<colgroup>
-						<c:if test="${member.member_id eq 'admin' }">
-							<col style="width: 10%;">
-						</c:if>	
+							<c:if test="${member.member_id eq 'admin' }">
+								<col style="width: 10%;">
+							</c:if>
 							<col style="width: 5%;">
 							<col style="width: 15%;">
 							<col style="width: auto;">
