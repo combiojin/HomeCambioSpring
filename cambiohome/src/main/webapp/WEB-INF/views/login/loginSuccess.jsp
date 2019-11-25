@@ -24,8 +24,8 @@
 					<h3>Cambio Login Success</h3>
 				</div>
 				<br>
-				
-					
+				<h2 style="text-align: center">환영합니다. ${member.member_id} 님</h2>
+				<br>
 			</div>
 			<div class="col-md-12">
 				<div style="text-align: center;">

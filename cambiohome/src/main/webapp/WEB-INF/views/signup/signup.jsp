@@ -11,6 +11,7 @@
 		location.href = "/org";
 	}
 
+	//다음 api
 	function execPostCode() {
 		new daum.Postcode({
 			oncomplete : function(data) {
