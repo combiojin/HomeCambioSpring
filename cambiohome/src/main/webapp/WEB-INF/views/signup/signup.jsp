@@ -10,7 +10,279 @@
 	function doCancel() {
 		location.href = "/org";
 	}
-
+	
+	//모든 공백 체크 정규식
+	var empJ = /\s/g;
+	//아이디 정규식
+	var ibJ = /^[a-z0-9][a-z0-9_\-]{4,19}$/;
+	//비밀번호 정규식
+	var pwJ = /^[A-Za-z0-9]{4,12}$/;
+	//이름 정규식
+	var nameJ = /^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/;
+	//이메일 정규식
+	var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+	//휴대폰 번호 정규식
+	var phoneJ = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?(0-9{4})$/;
+	
+	/^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/
+	
+	var birthJ = false;
+	
+	var address = $('#member_detailaddress');
+	
+	$(document).ready(function() {
+		var address = $('#member_datailaddress');
+		
+	});
+	
+	//아이디 중복 확인
+	$('#member_id').blur(function() {
+		if($('#member_id').val() == '') {
+			$('#id_check').text('아이디를 입력하세요.');
+			$('#id_check').css('color','red');
+		} else if (idJ.test($('#member_id').val())!=true) {
+			$('#id_check').text('4~12자의 영문, 숫자만 사용 가능합니다.');
+			$('#id_check').css('color','red');
+		} else if ($('#member_id').val()!='') {
+			var member_id=$('#member_id').val();
+			$.ajax({
+				async : true,
+				type : 'POST',
+				data : member_id, //member_id라는 이름으로 member_id라는 데이터를 @WebServlet("/member/idsearch.do")에 보내겠다.
+				url: '${path}/member/idsearch.do',
+				dateType: 'json',
+				contentType: "application/json; charset=UTF-8",
+				success : function(data) {
+					if(data.cnt > 0) {
+						$('#id_check').text('중복된 아이디 입니다.');
+						$('#id_check').css('color','red');
+						$('#usercheck').css("disabled",true);
+					} else {
+						if(idJ.test(member_id)){
+							$('#id_check').text('사용가능한 아이디 입니다.');
+							$('#id_check').css('color','red');
+							$('#usercheck').css("disabled",false);
+						} else if(member_id == '') {
+							$('#id_check').text('아이디를 입력해주세요.');
+							$('#id_check').css('color','red');
+							$('#usercheck').css("disabled",true);
+						} else {
+							$('#id_check').text('아이디는 소문자와 숫자 4~12자리만 가능합니다.');
+							$('#id_check').css('color','red');
+							$('#usercheck').css("disabled",true);
+						}
+					} 
+				}
+			});//ajax
+		}//else if
+	});//blur
+	
+	$('form').on('submit',function(){
+		var inval_Arr = new Array[8].fill(false);
+		if (idJ.test($('#member_id').val())) {
+			inval_Arr[0] = true;
+		} else {
+			inval_Arr[0] = false;
+			alert('아이디를 확인하세요.');
+			return false;
+		}
+		
+		//비밀번호가 같은경우 && 비밀번호 정규식
+		if(($('#member_pw').val() == ($('#member_cpw').val())) && pwJ.test($('#member_pw').val())) {
+			inval_Arr[1] = true;
+		} else {
+			inval_Arr[1] = false;
+			alert('비밀번호를 확인하세요.');
+			return false;
+		}
+		
+		//이름 정규식
+		if (nameJ.test($('#member_name').val())) {
+			inval_Arr[2] = true;
+		} else {
+			inval_Arr[2] = false;
+			alert('이름을 확인하세요.');
+			
+			return false;
+		}
+		
+		//생년월일 정규식
+		if (birthJ) {
+			console.log(birthJ);
+			inval_Arr[3] = true;
+		} else {
+			inval_Arr[3] = false;
+			alert('생년월일을 확인하세요.');
+			return false;
+		}
+		
+		//이메일 정규식
+		if(mailJ.test($('#member_mail').val())){
+			console.log(mailJ.test($('#member_mail').val()));
+			inval_Arr[4] = true;
+		} else {
+			inval_Arr[4] = false;
+			alert('이메일을 확인하세요.');
+			return false;
+		}
+		
+		//휴대폰번호 정규식
+		if(phoneJ.test($('#member_phone').val())){
+			console.log(phoneJ.test($('#member_phone').val()));
+			inval_Arr[5] = true;
+		} else {
+			inval_Arr[5] = false;
+			alert('휴대폰 번호를 확인하세요.');
+			return false;
+		}
+		
+		//성별 확인
+		if(member.member_gender[0].checked == false && member.member_gender[1].checked == false) {
+			inval_Arr[6] = false;
+			alert('성별을 확인하세요.');
+			 return false;
+		} else {
+			inval_Arr[6] = true;
+		}
+		
+		//주소확인
+		if (address.val() == '') {
+			inval_Arr[7] = false;
+			alert('주소를 확인하세요.');
+			return false;
+		} else {
+			inval_Arr[7] = true;
+		}
+		
+		//전체 유효성 검사
+		var validAll = true;
+		for (var i = 0 ; i < inval_Arr.length; i++) {
+			if (inval_Arr[i] == false) {
+				validAll = false;
+			}
+		}
+		//유효성 모두 통과
+		if (validAll == true){
+			alert('CamBio 가입을 환영합니다.');
+		} else {
+			alert('정보를 다시 확인하세요.')
+		}
+	});
+	
+	
+	
+	$('#member_id').blur(function() {
+		if (idJ.test($('#member_id').val())){
+			console.log('true');
+			$('#id_check').text('');			
+		} else {
+			console.log('false');
+			$('#id_check').text('5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.');
+			$('#id_check').css('color','red');
+		}
+	});
+	
+	$('#member_pw').blur(function() {
+		if (pwJ.test($('#member_pw').val())) {
+			console.log('true');
+			$('#pw_check').text('');
+		} else {
+			console.log('false');
+			console.log('false');
+			$('#pw_check').text('4~12자의 숫자, 문자로만 사용 가능합니다.');
+			$('#pw_check').css('color','red');
+		}
+	});
+	
+	// pw ~ cpw 패스워드 일치 확인
+	$('#member_cpw').blur(function() {
+		if($('#member_pw').val() != $(this).val()) {
+			$('#cpw_check').text('비밀번호가 일치하지 않습니다.');
+			$('#cpw_check').css('color','red');
+		} else {
+			$('#cpw_check').text('');
+		}
+	});
+	
+	//이름에 특수문자 들어가지 않도록 설정
+	$('#member_name').blur(function() {
+		if (nameJ.test($(this).val())){
+			console.log(nameJ.test($(this).val()));
+			$('#name_check').text('');			
+		} else {
+			$('#id_check').text('한글 2~4자 이내로 입력하세요. (특수기호, 공백 사용 불가)');
+			$('#id_check').css('color','red');
+		}
+	});
+	
+	$('#member_mail').blur(function() {
+		if (mailJ.test($(this).val())){
+			$('#mail_check').text('');			
+		} else {
+			$('#mail_check').text('이메일 양식을 확인해 주세요.');
+			$('#mail_check').css('color','red');
+		}
+	});
+	
+	//생일 유효성 검사
+	var birthJ = false;
+	
+	//생년월일 birthJ 유효성 검사
+	$('#member_birth').blur(function() {
+		var dateStr = $(this).val();
+		var year = Number(dateStr.substr(0,4)); // 입력한 값의 0 ~ 4자리까지 (연)
+		var month = Number(dateStr.substr(4,2)); // 입력한 값의 4번째 자리부터 2자리 숫자 (월)
+		var day = Number(dateStr.substr(6,2)); // 입력한 값의 6번째 자리부터 2자리 숫자 (일)
+		var today = new Date(); //날짜 변수 선언
+		var yearNow = today.getFullYear(); // 올해 연도 가져옴
+		
+		if (dateStr.length <= 8) {
+			//연도의 경우 1900 보다 작거나 yearNow 보다 크다면 false를 반환
+			if(year > yearNow || year < 1900) {
+				$('#birth_check').text('생년월일을 확인해주세요');
+				$('#birth_check').css('color','red');
+			} else if (month < 1 || month > 12){
+				$('#birth_check').text('생년월일을 확인해주세요');
+				$('#birth_check').css('color','red');
+			} else if (day < 1 || day > 31) {
+				$('#birth_check').text('생년월일을 확인해주세요');
+				$('#birth_check').css('color','red');
+			} else if ((month ==4 || month ==6 ||month ==9 || month==11) && day == 31) {
+				$('#birth_check').text('생년월일을 확인해주세요');
+				$('#birth_check').css('color','red');
+			} else if (month == 2) {
+				var isleap = (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
+				
+				if ( day > 29 || (day==29 && !isleap)) {
+					$('#birth_check').text('생년월일을 확인해주세요');
+					$('#birth_check').css('color','red');
+				} else {
+					$('#birth_check').text('');
+					birthJ = true;
+				}
+			} else {
+				$('#birth_check').text('');
+				birthJ = true;
+			}
+		} else {
+			//1. 입력된 생년월일이 8자 초과할때 : auth:false
+			$('#birth_check').text('생년월일을 확인해주세요');
+			$('#birth_check').css('color','red');
+		}
+		
+		//휴대전화
+		$('#member_phone').blur(function() {
+			if (phoneJ.test($(this).val())){
+				console.log(phoneJ.test($(this).val()));
+				$('#phone_check').text('');			
+			} else {
+				$('#phone_check').text('휴대폰 번호를 확인해 주세요.');
+				$('#phone_check').css('color','red');
+			}
+		});
+	});
+	
+	
 	//다음 api
 	function execPostCode() {
 		new daum.Postcode({
@@ -67,14 +339,14 @@
 					style="background-color: black; width: 100%; height: 50px; text-align: center; color: white;">
 					<h2 style="text-align: center;">CamBio SignUp</h2>
 				</div>
-				<form action="${path}/member/signupProc.do">
+				<form action="${path}/member/signupProc.do" role="form"
+					id="usercheck" name="member">
 					<div class="form-group">
 						<i class="fas fa-user">ID</i>
 						<div class="col-md-12">
-							<input type="text" class="form-control"
-								style="width: 70%; display: inline;" id="member_id"
+							<input type="text" class="form-control" id="member_id"
 								placeholder="Id" name="member_id">
-							<button style="float: right;" class="btn btn-dark btn-md">중복확인</button>
+							<div class="eheck_font" id="id_check"></div>
 						</div>
 
 					</div>
@@ -83,6 +355,7 @@
 						<div class="col-md-12">
 							<input type="password" class="form-control" id="member_pw"
 								placeholder="Password" name="member_pw">
+							<div class="eheck_font" id="pw_check"></div>
 						</div>
 					</div>
 					<div class="form-group">
@@ -90,6 +363,7 @@
 						<div class="col-md-12">
 							<input type="password" class="form-control" id="member_cpw"
 								placeholder="Confirm Password" name="member_cpw">
+							<div class="eheck_font" id="cpw_check"></div>
 						</div>
 					</div>
 					<div class="form-group">
@@ -97,6 +371,7 @@
 						<div class="col-md-12">
 							<input type="text" class="form-control" id="member_name"
 								placeholder="Name" name="member_name">
+							<div class="eheck_font" id="name_check"></div>
 						</div>
 					</div>
 					<div class="form-group">
@@ -119,13 +394,16 @@
 						<div class="col-md-12">
 							<input type="text" class="form-control" id="member_birth"
 								placeholder="ex)19000000" name="member_birth">
+							<div class="eheck_font" id="birth_check"></div>
 						</div>
 					</div>
 					<div class="form-group">
-						<span><i class="fas fa-phone"></i>PHONE NUMBER</span>
+						<span><i class="fas fa-phone"></i>PHONE NUMBER ('-' 없이 번호만
+							입력해주세요)</span>
 						<div class="col-md-12">
 							<input type="text" class="form-control" id="member_phone"
 								placeholder="Phone number" name="member_phone">
+							<div class="eheck_font" id="phone_check"></div>
 						</div>
 					</div>
 					<div class="form-group">
@@ -133,6 +411,7 @@
 						<div class="col-md-12">
 							<input type="text" class="form-control" id="member_mail"
 								placeholder="E-mail" name="member_mail">
+							<div class="eheck_font" id="mail_check"></div>
 						</div>
 						<i class="fas fa-map-marked-alt">ADDRESS</i>
 						<div class="col-md-12">
@@ -140,8 +419,9 @@
 								style="width: 70%; display: inline;" id="member_addressnumber"
 								placeholder="우편번호" name="member_addressnumber"
 								readonly="readonly">
-							<button type="button" style="float: right;" class="btn btn-dark btn-md"
-								onclick="execPostCode();">우편번호 찾기</button>
+							<button type="button" style="float: right;"
+								class="btn btn-dark btn-md" onclick="execPostCode();">우편번호
+								찾기</button>
 						</div>
 						<div class="col-md-12">
 							<input type="text" class="form-control" style="margin-top: 10px;"

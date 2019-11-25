@@ -39,10 +39,10 @@
 	<insert id="insertMember"
 		parameterType="com.cambio.org.member.MemberDTO">
 		insert into `cambio`.`member`
-		(member_id,member_pw,member_cpw,member_gender,member_birth,member_phone,
+		(member_id,member_pw,member_cpw,member_name,member_gender,member_birth,member_phone,
 		member_mail,member_addressnumber,member_address,member_detailaddress,reg_dt,edit_dt)
 		values
-		(#{member_id},#{member_pw},#{member_cpw},#{member_gender},#{member_birth},
+		(#{member_id},#{member_pw},#{member_cpw},#{member_name},#{member_gender},#{member_birth},
 		#{member_phone},#{member_mail},#{member_addressnumber},#{member_address},#{member_detailaddress},
 		now(),now())
 	</insert>
@@ -58,7 +58,7 @@
 	<update id="updateMember">
 		update `cambio`.`member`
 		set
-		member_pw=#{member_pw},member_cpw=#{member_cpw},member_phone=#{member_phone},member_mail=#{member_mail},
+		member_pw=#{member_pw},member_cpw=#{member_cpw},member_phone=#{member_phone},member_mail=#{member_mail},member_name=#{member_name},
 		member_addressnumber=#{member_addressnumber},member_address=#{member_address},member_detailaddress=#{member_detailaddress},
 		deit_dt=now()
 		where member_id=#{member_id}
@@ -68,7 +68,7 @@
 	<update id="adminUpdate"
 		parameterType="com.cambio.org.member.MemberDTO">
 		update member set member_id=#{member_id},
-		member_pw=#{member_pw},member_cpw=#{member_cpw},member_phone=#{member_phone},member_mail=#{member_mail},
+		member_pw=#{member_pw},member_cpw=#{member_cpw},member_phone=#{member_phone},member_mail=#{member_mail},member_name=#{member_name},
 		member_addressnumber=#{member_addressnumber},member_address=#{member_address},member_detailaddress=#{member_detailaddress},
 		deit_dt=now()
 		where member_idx=#{member_idx}
