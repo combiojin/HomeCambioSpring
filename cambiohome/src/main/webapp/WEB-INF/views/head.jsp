@@ -46,3 +46,6 @@
 <!-- websocket -->
 <script type="text/javascript" src="${path}/resources/js/json2.js" ></script>
 <script type="text/javascript" src="${path}/resources/js/sockjs.min.js"></script>
+
+<!-- daum address api -->
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
