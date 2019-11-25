@@ -340,7 +340,7 @@
 					<h2 style="text-align: center;">CamBio SignUp</h2>
 				</div>
 				<form action="${path}/member/signupProc.do" role="form"
-					id="usercheck" name="member">
+					id="usercheck" name="member" method="post">
 					<div class="form-group">
 						<i class="fas fa-user">ID</i>
 						<div class="col-md-12">
