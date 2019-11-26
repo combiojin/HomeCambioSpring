@@ -47,6 +47,22 @@
 		now(),now())
 	</insert>
 
+	<!-- 회원 인증키(난수) 생성 -->
+	<insert id="GetKey" parameterType="java.util.HashMap">
+		update `cambio`.`member` set member_key =
+		#{member_id} where member_id = #{member_key}
+	</insert>
+	<!-- 회원 인증키(난수) Y로 변경 -->
+	<update id="alter_userKey" parameterType="java.util.HashMap">
+		update `cambio`.`member` set
+		member_key = 'Y' where member_id = #{member_id} and member_key = #{member_key}
+	</update>
+
+	<!-- 아이디체크 -->
+	<select id="checkOverId" parameterType="String" resultType="int">
+		select count(*) from `cambio`.`member` where member_id = #{member_id} 
+	</select>
+
 	<!-- 회원정보 상세 보기 -->
 	<select id="viewMember"
 		resultType="com.cambio.org.member.MemberDTO">

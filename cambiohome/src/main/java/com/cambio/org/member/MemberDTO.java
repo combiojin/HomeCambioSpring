@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class MemberDTO {
-
+	
 	private int member_idx;
 	private String member_id;
 	private String member_pw;

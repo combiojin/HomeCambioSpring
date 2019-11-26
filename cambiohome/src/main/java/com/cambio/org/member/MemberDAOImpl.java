@@ -29,7 +29,26 @@ public class MemberDAOImpl implements MemberDAO {
 	public int memberListCnt(Search search) throws Exception{
 		return sqlSession.selectOne("member.memberListCnt",search);
 	}
-
+	@Override
+	public int GetKey(String member_id, String member_key) throws Exception {
+		HashMap<String, String> hm = new HashMap<String, String>();
+		hm.put("member_id",member_id);
+		hm.put("member_key",member_key);
+		return sqlSession.update("member.GetKey", hm);
+	}
+	
+	@Override
+	public int alter_userKey(String member_id, String key) throws Exception {
+		HashMap<String, String> hm = new HashMap<String, String>();
+		hm.put("member_id",member_id);
+		hm.put("key",key);
+		return sqlSession.update("member.alter_userKey",key);
+	}
+	
+	//아이디 체크
+	public int checkOverId(String member_id) throws Exception {
+		return sqlSession.selectOne("member.checkOverId", member_id);
+	}
 
 	// 회원가입
 	@Override

@@ -11,6 +11,7 @@ public interface MemberService {
 	public List<MemberDTO> memberList(Search search) throws Exception;
 	public int memberListCnt(Search search) throws Exception;
 
+	public int checkOverId(String member_id) throws Exception;
 	public void insertMember(MemberDTO dto);
 	public MemberDTO viewMember(String member_id);
 	public void deleteMember(MemberDTO dto);

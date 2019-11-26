@@ -25,6 +25,10 @@ public class MemberServiceImpl implements MemberService{
 	public int memberListCnt(Search search) throws Exception{
 		return memberDao.memberListCnt(search);
 	}
+	
+	public int checkOverId(String member_id) throws Exception {
+		return memberDao.checkOverId(member_id);
+	}
 
 	@Override
 	public void insertMember(MemberDTO dto) {
