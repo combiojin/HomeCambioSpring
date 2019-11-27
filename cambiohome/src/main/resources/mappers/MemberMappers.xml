@@ -48,12 +48,12 @@
 	</insert>
 
 	<!-- 회원 인증키(난수) 생성 -->
-	<insert id="GetKey" parameterType="java.util.HashMap">
-		update `cambio`.`member` set member_key =
-		#{member_id} where member_id = #{member_key}
+	<insert id="GetKey" parameterType="com.cambio.org.member.MemberDTO">
+		update `cambio`.`member` set member_key = #{member_key} where member_id = #{member_id}
 	</insert>
+	
 	<!-- 회원 인증키(난수) Y로 변경 -->
-	<update id="alter_userKey" parameterType="java.util.HashMap">
+	<update id="alter_userKey" parameterType="com.cambio.org.member.MemberDTO">
 		update `cambio`.`member` set
 		member_key = 'Y' where member_id = #{member_id} and member_key = #{member_key}
 	</update>
@@ -91,11 +91,11 @@
 	</update>
 
 	<!-- 로그인 -->
-	<select id="memberlogin"
-		resultType="com.cambio.org.member.MemberDTO">
+	<select id="memberlogin" resultType="com.cambio.org.member.MemberDTO">
 		select member_id from `cambio`.`member`
 		where
-		member_id=#{member_id} and member_pw=#{member_pw}
+		member_id=#{member_id} and member_pw=#{member_pw} 
+		and member_key ='Y'
 	</select>
 
 	<!-- 순번 select -->

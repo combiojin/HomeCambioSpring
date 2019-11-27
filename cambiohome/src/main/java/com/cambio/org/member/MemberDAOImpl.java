@@ -34,15 +34,20 @@ public class MemberDAOImpl implements MemberDAO {
 		HashMap<String, String> hm = new HashMap<String, String>();
 		hm.put("member_id",member_id);
 		hm.put("member_key",member_key);
-		return sqlSession.update("member.GetKey", hm);
+		MemberDTO md = new MemberDTO();
+		md.setMember_id(member_id);
+		md.setMember_key(member_key);
+		return sqlSession.update("member.GetKey", md);
 	}
 	
 	@Override
-	public int alter_userKey(String member_id, String key) throws Exception {
-		HashMap<String, String> hm = new HashMap<String, String>();
-		hm.put("member_id",member_id);
-		hm.put("key",key);
-		return sqlSession.update("member.alter_userKey",key);
+	public int alter_userKey(String member_id, String member_key) throws Exception {
+		MemberDTO md = new MemberDTO();
+		md.setMember_id(member_id);
+		md.setMember_key(member_key);
+		System.out.println("member_id  = "+ member_id);
+		System.out.println("member_key = "+ member_key);
+		return sqlSession.update("member.alter_userKey",md);
 	}
 	
 	//아이디 체크
@@ -54,6 +59,7 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public void insertMember(MemberDTO dto) {
 		sqlSession.insert("member.insertMember", dto);
+		
 	}
 
 	// 회원정보보기

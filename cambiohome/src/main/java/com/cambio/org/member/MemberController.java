@@ -36,7 +36,7 @@ public class MemberController {
 	MemberService memberService;
 	
 	@Autowired
-	MailSendService mailsendService;
+	private MailSendService mailsendService;
 
 	@RequestMapping(value = "/member/login.do")
 	public String login(Model model, HttpServletRequest request, HttpSession session) {
@@ -56,9 +56,9 @@ public class MemberController {
 		} else {
 			session.setAttribute("member", login);
 		}
-
+		
 		return "login/loginSuccess";
-
+		
 	}
 
 	// 로그아웃
@@ -111,14 +111,14 @@ public class MemberController {
 	public String signupProc(Model model, MemberDTO dto, HttpServletRequest request) throws Exception {
 
 		memberService.insertMember(dto);
-		
+		System.out.println("여기오냐");
 		mailsendService.mailSendWithUserKey(dto.getMember_mail(), dto.getMember_id(), request);
-		
+	
 		return "home";
 	}
 	
 	//e-mail 인증 
-	@RequestMapping(value = "/user/key_alter", method = RequestMethod.GET)
+	@RequestMapping(value = "/member/key_alter.do", method = RequestMethod.GET)
 	public String key_alterConfirm(@RequestParam("member_id") String member_id, @RequestParam("member_key") String member_key) throws Exception {
 
 		mailsendService.alter_userKey_service(member_id, member_key); // mailsender의 경우 @Autowired

@@ -19,13 +19,24 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<div
-					style="background-color: black; width: 100%; height: 50px; text-align: center; color: white;">
-					<h3>Cambio Login Success</h3>
-				</div>
-				<br>
-				<h2 style="text-align: center">환영합니다. ${member.member_id} 님</h2>
-				<br>
+				<c:if test="${sessionScope.member != null}">
+					<div
+						style="background-color: black; width: 100%; height: 50px; text-align: center; color: white;">
+						<h3>Cambio Login Success</h3>
+					</div>
+					<br>
+					<h2 style="text-align: center">환영합니다. ${member.member_id} 님</h2>
+					<br>
+				</c:if>
+				<c:if test="${sessionScope.member == null}">
+					<div
+						style="background-color: black; width: 100%; height: 50px; text-align: center; color: white;">
+						<h3>Cambio Login Fail</h3>
+					</div>
+					<br>
+					<h2 style="text-align: center">이메일 인증후 로그인 부탁드립니다.</h2>
+					<br>
+				</c:if>
 			</div>
 			<div class="col-md-12">
 				<div style="text-align: center;">

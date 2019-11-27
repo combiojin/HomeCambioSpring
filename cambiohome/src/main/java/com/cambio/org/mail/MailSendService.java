@@ -9,7 +9,6 @@ import javax.mail.internet.MimeMessage.RecipientType;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -23,6 +22,7 @@ public class MailSendService {
 	private JavaMailSender mailSender;
 	@Autowired
 	private SqlSession sqlSession;
+	@Autowired
 	private MemberDAO memberDAO;
 
 	// 이메일 난수 만드는 메서드
@@ -60,18 +60,19 @@ public class MailSendService {
 	public void mailSendWithUserKey(String member_mail, String member_id, HttpServletRequest request) throws Exception {
 
 		String member_key = getKey(false, 20);
-		memberDAO = sqlSession.getMapper(MemberDAO.class);
+//		memberDAO = sqlSession.getMapper(MemberDAO.class);
+		System.out.println("member_id"+member_id);
 		memberDAO.GetKey(member_id, member_key);
 
 		MimeMessage mail = mailSender.createMimeMessage();
 		String htmlStr = "<h2>안녕하세요 CamBio cambiojin입니다!</h2><br><br>" + "<h3>" + member_id + "님</h3>"
 				+ "<p>인증하기 버튼을 누르시면 로그인을 하실 수 있습니다 : " + "<a href='http://localhost:9000" + request.getContextPath()
-				+ "/member/key_alter?member_id=" + member_id + "&member_key=" + member_key + "'>인증하기</a></p>"
+				+ "/member/key_alter.do?member_id=" + member_id + "&member_key=" + member_key + "'>인증하기</a></p>"
 				+ "(혹시 잘못 전달된 메일이라면 이 이메일을 무시하셔도 됩니다)";
 		try {
 			mail.setSubject("[본인인증] CamBio cambiojin의 인증메일입니다", "utf-8");
 			mail.setText(htmlStr, "utf-8", "html");
-			mail.addRecipient(RecipientType.TO, new InternetAddress(member_key));
+			mail.addRecipient(RecipientType.TO, new InternetAddress(member_mail));
 			mailSender.send(mail);
 		} catch (MessagingException e) {
 			e.printStackTrace();
@@ -85,7 +86,6 @@ public class MailSendService {
 
 		int resultCnt = 0;
 
-		memberDAO = sqlSession.getMapper(MemberDAO.class);
 		resultCnt = memberDAO.alter_userKey(member_id, member_key);
 
 		return resultCnt;

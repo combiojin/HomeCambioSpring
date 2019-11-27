@@ -155,8 +155,7 @@
 		var inval_Arr = new Array(5).fill(false);
 		$('#signup_submit').click(function(){
 			// 비밀번호가 같은 경우 && 비밀번호 정규식
-			if (($('#member_pw').val() == ($('#member_cpw').val()))
-					&& pwJ.test($('#member_pw').val())) {
+			if (($('#member_pw').val() == ($('#member_cpw').val())) && pwJ.test($('#member_pw').val())) {
 				inval_Arr[0] = true;
 			} else {
 				inval_Arr[0] = false;
@@ -198,8 +197,8 @@
 			}
 			
 			if(validAll){ // 유효성 모두 통과
+				$('#usercheck').submit();
 				alert('CamBio님께서 인증 이메일을 보냈으니 확인해주세요!');
-				
 			} else{
 				alert('입력한 정보들을 다시 한번 확인해주세요 :)')
 				
@@ -265,8 +264,7 @@
 					style="background-color: black; width: 100%; height: 50px; text-align: center; color: white;">
 					<h2 style="text-align: center;">CamBio SignUp</h2>
 				</div>
-<%-- 				<form action="${path}/member/signupProc.do" role="form" --%>
-<!-- 					id="usercheck" name="member" method="post"> -->
+				<form action="${path}/member/signupProc.do" role="form" id="usercheck" name="member" method="post">
 					<div class="form-group">
 						<i class="fas fa-user">ID</i>
 						<div class="col-md-12">
@@ -359,10 +357,10 @@
 						</div>
 					</div>
 					<div class="col-md-12" style="text-align: center;">
-						<button class="btn btn-dark" id="signup_submit">회원가입</button>
+						<button type="button" class="btn btn-dark" id="signup_submit">회원가입</button>
 						<button class="btn btn-dark" onclick="doCancel();">취소</button>
 					</div>
-<!-- 				</form> -->
+				</form>
 			</div>
 		</div>
 	</div>
