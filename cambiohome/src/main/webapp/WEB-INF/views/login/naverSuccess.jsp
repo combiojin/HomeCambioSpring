@@ -41,5 +41,13 @@
 			</div>
 		</div>
 	</div>
+	<footer class="col-md-12" style="text-align: center;">
+		<div class="col-md-12">
+			<a><img src="${path}/resources/image/logo_black.png"
+				style="height: 50px; margin-bottom: 10px;" /></a>
+		</div>
+		<div class="col-md-12">Copyrightⓒ 2019 By cambiojin. All right
+			reserved.</div>
+	</footer>
 </body>
 </html>

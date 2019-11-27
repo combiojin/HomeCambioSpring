@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,19 +7,27 @@
 <title>Insert title here</title>
 <%@include file="../head.jsp"%>
 <script type="text/javascript">
-	$(document).ready(function(){
-		var mode = '<c:out value="${mode}"/>';
-		if ( mode == 'update'){
-		//입력 폼 셋팅
-			$("#reg_id").prop('readonly', true);
-			$("input:hidden[name='bid']").val('<c:out value="${boardContent.bid}"/>');
-			$("input:hidden[name='mode']").val('<c:out value="${mode}"/>');
-			$("#reg_id").val('<c:out value="${boardContent.reg_id}"/>');
-			$("#title").val('<c:out value="${boardContent.title}"/>');
-			$("#content").val('<c:out value="${boardContent.content}"/>');
-			$("#tag").val('<c:out value="${boardContent.tag}"/>');
-		}
-	});
+	$(document)
+			.ready(
+					function() {
+						var mode = '<c:out value="${mode}"/>';
+						if (mode == 'update') {
+							//입력 폼 셋팅
+							$("#reg_id").prop('readonly', true);
+							$("input:hidden[name='bid']").val(
+									'<c:out value="${boardContent.bid}"/>');
+							$("input:hidden[name='mode']").val(
+									'<c:out value="${mode}"/>');
+							$("#reg_id").val(
+									'<c:out value="${boardContent.reg_id}"/>');
+							$("#title").val(
+									'<c:out value="${boardContent.title}"/>');
+							$("#content").val(
+									'<c:out value="${boardContent.content}"/>');
+							$("#tag").val(
+									'<c:out value="${boardContent.tag}"/>');
+						}
+					});
 	$(document).on('click', '#btnSave', function(e) {
 		e.preventDefault();
 		$("#form").submit();
@@ -37,8 +46,8 @@
 	<article>
 		<div class="container" role="main">
 			<h2>게시물 작성</h2>
-			<form:form name="form" id="form" role="form"
-				modelAttribute="dto" method="POST" action="${path}/board/boardProc.do">
+			<form:form name="form" id="form" role="form" modelAttribute="dto"
+				method="POST" action="${path}/board/boardProc.do">
 				<form:hidden path="bid" />
 				<input type="hidden" name="mode">
 				<div class="mb-3">
@@ -55,7 +64,7 @@
 					<label for="content">내용</label>
 					<form:textarea path="content" rows="5" class="form-control"
 						name="content" id="content" placeholder="내용을 입력해 주세요" />
-						
+
 				</div>
 				<div class="mb-3">
 					<label for="tag">TAG</label>
@@ -69,7 +78,13 @@
 			</div>
 		</div>
 	</article>
-	<script src="${path}/resources/js/ckeditor.js"></script>			
+	<footer class="col-md-12" style="text-align: center;">
+		<div class="col-md-12">
+			<a><img src="${path}/resources/image/logo_black.png"
+				style="height: 50px; margin-bottom: 10px;" /></a>
+		</div>
+		<div class="col-md-12">Copyrightⓒ 2019 By cambiojin. All right
+			reserved.</div>
+	</footer>
 </body>
-
 </html>

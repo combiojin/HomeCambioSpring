@@ -64,13 +64,21 @@ body {
 				el : '.swiper-scrollbar',
 				hide : true,
 			},
-			autoplay: {
-			    delay: 5000,
+			autoplay : {
+				delay : 5000,
 			},
 		});
 	</script>
 	<!-- 추후 넣어야 할 것! -->
 
 	<!-- 뭘 넣어야 할까? -->
+	<footer class="col-md-12" style="text-align: center;">
+		<div class="col-md-12">
+			<a><img src="${path}/resources/image/logo_black.png"
+				style="height: 50px; margin-bottom: 10px;" /></a>
+		</div>
+		<div class="col-md-12">Copyrightⓒ 2019 By cambiojin. All right
+			reserved.</div>
+	</footer>
 </body>
 </html>

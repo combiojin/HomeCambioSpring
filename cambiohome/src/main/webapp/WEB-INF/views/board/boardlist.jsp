@@ -78,99 +78,109 @@
 		<div class="row">
 			<div class="col-md-12">
 				<form id="delefrm" action="${path}/board/admindelete.do">
-					<div
-						style="background-color: black; width: 100%; height: 50px; text-align: center; color: white;">
-						<h2 style="text-align: center;">CamBio BoardList</h2>
-					</div>
-					<table class="table table-dark table-bordered"
-						style="text-align: center;">
-						<colgroup>
-						<c:if test="${member.member_id eq 'admin' }">
-							<col style="width: 10%;">
-						</c:if>	
-							<col style="width: 5%;">
-							<col style="width: auto;">
-							<col style="width: 15%;">
-							<col style="width: 10%;">
-							<col style="width: 10%;">
-						</colgroup>
-						<thead>
-							<tr>
-								<c:if test="${sessionScope.member.member_id eq 'admin' }">
-									<th>체크</th>
+					<c:if test="${sessionScope.member == null}">
+						<div
+							style="background-color: black; width: 100%; height: 50px; text-align: center; color: white;">
+							<h3>Cambio Login Please</h3>
+						</div>
+						<br>
+						<h2 style="text-align: center">로그인후 이용할수 있는 메뉴입니다.</h2>
+						<br>
+					</c:if>
+					<c:if test="${sessionScope.member != null}">
+						<div
+							style="background-color: black; width: 100%; height: 50px; text-align: center; color: white;">
+							<h2 style="text-align: center;">CamBio BoardList</h2>
+						</div>
+						<table class="table table-dark table-bordered"
+							style="text-align: center;">
+							<colgroup>
+								<c:if test="${member.member_id eq 'admin' }">
+									<col style="width: 10%;">
 								</c:if>
-								<th>NO</th>
-								<th>글제목</th>
-								<th>작성자</th>
-								<th>조회수</th>
-								<th>작성일</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:choose>
-								<c:when test="${empty boardList}">
-									<tr>
-										<td colspan="6" align="center">데이터가 없습니다.</td>
-									</tr>
-								</c:when>
-
-								<c:when test="${!empty boardList}">
-									<c:forEach var="list" items="${boardList}">
+								<col style="width: 5%;">
+								<col style="width: auto;">
+								<col style="width: 15%;">
+								<col style="width: 10%;">
+								<col style="width: 10%;">
+							</colgroup>
+							<thead>
+								<tr>
+									<c:if test="${sessionScope.member.member_id eq 'admin' }">
+										<th>체크</th>
+									</c:if>
+									<th>NO</th>
+									<th>글제목</th>
+									<th>작성자</th>
+									<th>조회수</th>
+									<th>작성일</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:choose>
+									<c:when test="${empty boardList}">
 										<tr>
-											<c:if test="${member.member_id eq 'admin' }">
-												<td><input type="checkbox" name="bid"
-													value='<c:out value="${list.bid}"/>'></td>
-											</c:if>
-											<td><c:out value="${list.bid}"></c:out></td>
-											<td><a href="#"
-												onclick="fn_contentView(<c:out value="${list.bid}"></c:out>)">
-													<c:out value="${list.title}"></c:out>
-											</a></td>
-											<td><c:out value="${list.reg_id}"></c:out></td>
-											<td><c:out value="${list.view_cnt}"></c:out></td>
-											<td><c:out value="${list.reg_dt}"></c:out></td>
+											<td colspan="6" align="center">데이터가 없습니다.</td>
 										</tr>
-									</c:forEach>
-								</c:when>
-							</c:choose>
-						</tbody>
-					</table>
-					<!-- pagination{e} -->
-					<div id="paginationBox" class="col-sm-8" style="float: left;">
-						<ul class="pagination">
-							<c:if test="${pagination.prev}">
-								<li class="page-item pagecolor"><a
-									class="page-link pagecolor" href="#"
-									onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">Previous</a></li>
-							</c:if>
-							<c:forEach begin="${pagination.startPage}"
-								end="${pagination.endPage}" var="idx">
-								<li
-									class="page-item pagecolor<c:out value="${pagination.page == idx ? 'active' : ''}"/> "><a
-									class="page-link pagecolor" href="#"
-									onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}')">
-										${idx} </a></li>
-							</c:forEach>
-							<c:if test="${pagination.next}">
-								<li class="page-item pagecolor"><a class="page-link"
-									href="#"
-									onClick="fn_next('${pagination.range}','${pagination.range}', '${pagination.rangeSize}')">Next</a></li>
-							</c:if>
-						</ul>
-					</div>
-					<!-- pagination{e} -->
-					<c:if test="${member.member_id eq 'admin' }">
-						<div class="col-sm-1" style="float: right; margin: 10px;">
-							<button type="button" class="btn btn-dark btn-md"
-								id="btnadmindelete" onclick="dodelete();">삭제</button>
+									</c:when>
+
+									<c:when test="${!empty boardList}">
+										<c:forEach var="list" items="${boardList}">
+											<tr>
+												<c:if test="${member.member_id eq 'admin' }">
+													<td><input type="checkbox" name="bid"
+														value='<c:out value="${list.bid}"/>'></td>
+												</c:if>
+												<td><c:out value="${list.bid}"></c:out></td>
+												<td><a href="#"
+													onclick="fn_contentView(<c:out value="${list.bid}"></c:out>)">
+														<c:out value="${list.title}"></c:out>
+												</a></td>
+												<td><c:out value="${list.reg_id}"></c:out></td>
+												<td><c:out value="${list.view_cnt}"></c:out></td>
+												<td><c:out value="${list.reg_dt}"></c:out></td>
+											</tr>
+										</c:forEach>
+									</c:when>
+								</c:choose>
+							</tbody>
+						</table>
+						<!-- pagination{e} -->
+						<div id="paginationBox" class="col-sm-8" style="float: left;">
+							<ul class="pagination">
+								<c:if test="${pagination.prev}">
+									<li class="page-item pagecolor"><a
+										class="page-link pagecolor" href="#"
+										onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">Previous</a></li>
+								</c:if>
+								<c:forEach begin="${pagination.startPage}"
+									end="${pagination.endPage}" var="idx">
+									<li
+										class="page-item pagecolor<c:out value="${pagination.page == idx ? 'active' : ''}"/> "><a
+										class="page-link pagecolor" href="#"
+										onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}')">
+											${idx} </a></li>
+								</c:forEach>
+								<c:if test="${pagination.next}">
+									<li class="page-item pagecolor"><a class="page-link"
+										href="#"
+										onClick="fn_next('${pagination.range}','${pagination.range}', '${pagination.rangeSize}')">Next</a></li>
+								</c:if>
+							</ul>
 						</div>
-					</c:if>
-					<c:if test="${sessionScope.member.member_id != null }">
-						<div class="col-sm-1" style="float: right; margin: 10px;">
-							<button type="button" class="btn btn-dark btn-md" id="btnWrite">작성</button>
-						</div>
-					</c:if>
-				</form>	
+						<!-- pagination{e} -->
+						<c:if test="${member.member_id eq 'admin' }">
+							<div class="col-sm-1" style="float: right; margin: 5px;">
+								<button type="button" class="btn btn-dark btn-sm"
+									id="btnadmindelete" onclick="dodelete();">삭제</button>
+							</div>
+						</c:if>
+						<c:if test="${sessionScope.member.member_id != null }">
+							<div class="col-sm-1" style="float: right; margin: 5px;">
+								<button type="button" class="btn btn-dark btn-sm" id="btnWrite">작성</button>
+							</div>
+						</c:if>
+				</form>
 			</div>
 		</div>
 		<div class="row">
@@ -197,6 +207,15 @@
 				<!-- search{e} -->
 			</div>
 		</div>
+		</c:if>
 	</div>
+	<footer class="col-md-12" style="text-align: center;">
+		<div class="col-md-12">
+			<a><img src="${path}/resources/image/logo_black.png"
+				style="height: 50px; margin-bottom: 10px;" /></a>
+		</div>
+		<div class="col-md-12">Copyrightⓒ 2019 By cambiojin. All right
+			reserved.</div>
+	</footer>
 </body>
 </html>

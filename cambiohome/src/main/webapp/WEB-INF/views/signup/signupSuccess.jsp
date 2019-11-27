@@ -12,8 +12,8 @@
 	<%@include file="../menu.jsp"%>
 	<div style="margin: 100px;">
 		<a><img
-			src="${path}/images/ms-logo.png"
-			style="height: 80px; margin-left: 10px;" /></a> <br> 
+			src="${path}/resources/image/logo_black.png"
+			style="height: 50px; margin-bottom: 10px;" /></a> <br> 
 		<h3>안녕하세요, ${param.member_id} 님</h3>
 		<br>
 		<p>환영합니다!</p>

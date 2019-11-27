@@ -70,18 +70,37 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12" style="text-align: center;">
-				<div
-					style="background-color: black; width: 100%; height: 50px; text-align: center; color: white;">
-					<h2 style="text-align: center;">CamBio Chat</h2>
-				</div>
-				<div id="chatMessage"
-					style="overFlow: auto; height: 500px; max-height: 500px; text-align: left; border: 1px solid;"></div>
-				<input type="text" id="message" placeholder="메시지 내용" /> <input
-					type="text" id="to" placeholder="귓속말대상" /> <input type="button"
-					class="btn btn-dark btn-sm" id="sendMessage" value="엔터" />
-
+				<c:if test="${sessionScope.member == null}">
+					<div
+						style="background-color: black; width: 100%; height: 50px; text-align: center; color: white;">
+						<h3>Cambio Login Please</h3>
+					</div>
+					<br>
+					<h2 style="text-align: center">로그인후 이용할수 있는 메뉴입니다.</h2>
+					<br>
+				</c:if>
+				<c:if test="${sessionScope.member != null}">
+					<div
+						style="background-color: black; width: 100%; height: 50px; text-align: center; color: white;">
+						<h2 style="text-align: center;">CamBio Chat</h2>
+					</div>
+					<div id="chatMessage"
+						style="overFlow: auto; height: 500px; max-height: 500px; text-align: left; border: 1px solid; margin-bottom: 10px;"></div>
+					<input type="text" id="message" placeholder="메시지 내용" />
+					<input type="text" id="to" placeholder="귓속말대상" />
+					<input type="button" class="btn btn-dark btn-sm" id="sendMessage"
+						value="엔터" />
+				</c:if>
 			</div>
 		</div>
 	</div>
+	<footer class="col-md-12" style="text-align: center;">
+		<div class="col-md-12">
+			<a><img src="${path}/resources/image/logo_black.png"
+				style="height: 50px; margin-bottom: 10px;" /></a>
+		</div>
+		<div class="col-md-12">Copyrightⓒ 2019 By cambiojin. All right
+			reserved.</div>
+	</footer>
 </body>
 </html>

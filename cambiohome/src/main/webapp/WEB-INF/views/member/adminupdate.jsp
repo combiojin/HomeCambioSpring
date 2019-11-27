@@ -27,7 +27,8 @@
 						<div class="col-md-12">
 							<input type="text" class="form-control"
 								style="width: 70%; display: inline;" id="member_id"
-								placeholder="Id" name="member_id" value="${memberselect.member_id}" readonly="readonly">
+								placeholder="Id" name="member_id"
+								value="${memberselect.member_id}" readonly="readonly">
 						</div>
 
 					</div>
@@ -49,7 +50,8 @@
 						<i class="fas fa-user">NAME</i>
 						<div class="col-md-12">
 							<input type="text" class="form-control" id="member_name"
-								placeholder="Name" name="member_name" value="${memberselect.member_name}" readonly="readonly">
+								placeholder="Name" name="member_name"
+								value="${memberselect.member_name}" readonly="readonly">
 						</div>
 					</div>
 					<div class="form-group">
@@ -72,21 +74,23 @@
 						<div class="col-md-12">
 							<input type="text" class="form-control" id="member_birth"
 								placeholder="ex)19000000" name="member_birth"
-								value="${memberselect.member_birth}"  readonly="readonly">
+								value="${memberselect.member_birth}" readonly="readonly">
 						</div>
 					</div>
 					<div class="form-group">
 						<span><i class="fas fa-phone"></i>PHONE NUMBER</span>
 						<div class="col-md-12">
 							<input type="text" class="form-control" id="member_phone"
-								placeholder="Phone number" name="member_phone" value="${memberselect.member_phone}">
+								placeholder="Phone number" name="member_phone"
+								value="${memberselect.member_phone}">
 						</div>
 					</div>
 					<div class="form-group">
 						<i class="fas fa-envelope">E-MAIL</i>
 						<div class="col-md-12">
 							<input type="text" class="form-control" id="member_mail"
-								placeholder="E-mail" name="member_mail" value="${memberselect.member_mail}">
+								placeholder="E-mail" name="member_mail"
+								value="${memberselect.member_mail}">
 						</div>
 						<i class="fas fa-map-marked-alt">ADDRESS</i>
 						<div class="col-md-12">
@@ -100,10 +104,11 @@
 						</div>
 						<div class="col-md-12">
 							<input type="text" class="form-control" style="margin-top: 10px;"
-								id="member_address" placeholder="도로명 주소" name="member_address" value="${memberselect.member_address}"
-								readonly="readonly"> <input type="text"
-								class="form-control" style="margin-top: 10px;"
-								id="member_detailaddress" placeholder="상세 주소" value="${memberselect.member_detailaddress}"
+								id="member_address" placeholder="도로명 주소" name="member_address"
+								value="${memberselect.member_address}" readonly="readonly">
+							<input type="text" class="form-control" style="margin-top: 10px;"
+								id="member_detailaddress" placeholder="상세 주소"
+								value="${memberselect.member_detailaddress}"
 								name="member_detailaddress">
 						</div>
 					</div>
@@ -113,5 +118,13 @@
 			</div>
 		</div>
 	</div>
+	<footer class="col-md-12" style="text-align: center;">
+		<div class="col-md-12">
+			<a><img src="${path}/resources/image/logo_black.png"
+				style="height: 50px; margin-bottom: 10px;" /></a>
+		</div>
+		<div class="col-md-12">Copyrightⓒ 2019 By cambiojin. All right
+			reserved.</div>
+	</footer>
 </body>
 </html>
