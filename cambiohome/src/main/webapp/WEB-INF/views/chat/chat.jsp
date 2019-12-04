@@ -53,7 +53,7 @@
 									message.to = to;
 								}
 
-								// 				chatSock.send(JSON.stringify(message));
+												chatSock.send(JSON.stringify(message));
 								$("#chatMessage").append(
 										"나 ->  " + $("#message").val()
 												+ "<br/>");

@@ -26,7 +26,8 @@
 									'<c:out value="${boardContent.content}"/>');
 							$("#tag").val(
 									'<c:out value="${boardContent.tag}"/>');
-						}
+
+	}
 					});
 	$(document).on('click', '#btnSave', function(e) {
 		e.preventDefault();
@@ -72,19 +73,17 @@
 						id="tag" placeholder="태그를 입력해 주세요" />
 				</div>
 			</form:form>
-			<div style="float: right;">
-				<button type="button" class="btn btn-md btn-dark" id="btnSave">저장</button>
-				<button type="button" class="btn btn-md btn-dark" id="btnList">목록</button>
+			<div class="col-md-12" >
+				<button type="button" class="btn btn-md btn-dark" style="text-align: right;" id="btnSave">저장</button>
+				<button type="button" class="btn btn-md btn-dark" style="text-align: right;" id="btnList">목록</button>
 			</div>
 		</div>
+
 	</article>
-	<footer class="col-md-12" style="text-align: center;">
-		<div class="col-md-12">
-			<a><img src="${path}/resources/image/logo_black.png"
-				style="height: 50px; margin-bottom: 10px;" /></a>
-		</div>
+	<div class="col-md-12" style="text-align: center;">
+		<div class="col-md-12"></div>
 		<div class="col-md-12">Copyrightⓒ 2019 By cambiojin. All right
 			reserved.</div>
-	</footer>
+	</div>
 </body>
 </html>
